@@ -4,12 +4,19 @@ export default class Cell extends Component {
     render() {
         return (
             <div onClick={this.props.onClick}
-                 style={{width:40+'px',
-                        height:40+'px',
+                 style={{width:30+'px',
+                        height:30+'px',
                         margin:5+'px',
                         padding:5+'px',
-                        background:this.props.selected?'blue':'red',
-                        display: 'inline-block'}}>
+                        background:this.props.selected?'lightBlue':'lightGray',
+                        'borderRadius':3+'px',
+                        display: 'inline-block',
+                        lineHeight: 30+'px',
+                        fontSize: 30+'px',
+                        textAlign: 'center',
+                        'fontFamily':'sans-serif',
+                        'cursor':'pointer'
+                        }}>
                 {this.props.value}
             </div>
         )
