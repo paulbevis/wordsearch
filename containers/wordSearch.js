@@ -8,6 +8,7 @@ class WordSearch extends Component {
 
         return (
             <Grid onCellClick={(xPos,yPos) =>
+            <div style={{width:100+'%', textAlign:'center'}}>
                                     dispatch(cellClickAction(xPos, yPos))
                                   } cells={cells}></Grid>
         )
