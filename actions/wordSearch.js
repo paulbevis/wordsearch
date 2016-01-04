@@ -1,19 +1,19 @@
-import {CELL_CLICK, GAME_START, LIST_SELECT} from '../constants/actionTypes.js'
+import {CELL_CLICK, GAME_START, GAME_SELECT} from '../constants/actionTypes.js'
 
-export function gameStartAction() {
+export function startGameAction() {
     return {
         type: GAME_START
     }
 }
 
-export function listSelectAction(){
+export function selectGameAction(changeValue) {
     return {
-        type:LIST_SELECT
+        type: GAME_SELECT,
+        changeValue
     }
 }
 
-export function cellClickAction(xPos, yPos){
-    console.log('cellClickAction')
+export function cellClickAction(xPos, yPos) {
     return {
         type: CELL_CLICK,
         xPos,
