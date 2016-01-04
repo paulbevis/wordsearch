@@ -1,16 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import {cellClickAction} from '../actions/wordSearch'
+import {cellClickAction, startGameAction, selectGameAction} from '../actions/wordSearch'
 import Grid from '../components/Grid'
+import Start from '../components/Start'
+import SelectGame from '../components/SelectGame'
+
 class WordSearch extends Component {
     render() {
-        const { dispatch, cells } = this.props;
+        const { dispatch, cells, selectedGame } = this.props;
 
         return (
-            <Grid onCellClick={(xPos,yPos) =>
             <div style={{width:100+'%', textAlign:'center'}}>
+                <Grid onCellClick={(xPos,yPos) =>
                                     dispatch(cellClickAction(xPos, yPos))
                                   } cells={cells}></Grid>
+
+                <div style={{display: 'inline-block'}}>
+                    <SelectGame onGameSelect={(value) => dispatch(selectGameAction(value))}/>
+                    <Start selectedGame={selectedGame} onStartGameClick={() =>
+                            dispatch(startGameAction())}/>
+                </div>
+            </div>
         )
     }
 }
@@ -18,7 +28,8 @@ class WordSearch extends Component {
 
 function select(state) {
     return {
-        cells:state.cells
+        cells: state.cells,
+        selectedGame:state.currentGame
     };
 }
 
