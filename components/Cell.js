@@ -8,7 +8,7 @@ export default class Cell extends Component {
                         height:30+'px',
                         margin:5+'px',
                         padding:5+'px',
-                        background:this.props.selected?'lightBlue':'lightGray',
+                        background:this.props.selected?'lightBlue':this.props.partOFWordFound?'lightGreen':'lightGray',
                         'borderRadius':3+'px',
                         display: 'inline-block',
                         lineHeight: 30+'px',

@@ -4,18 +4,20 @@ import {cellClickAction, startGameAction, selectGameAction} from '../actions/wor
 import Grid from '../components/Grid'
 import Start from '../components/Start'
 import SelectGame from '../components/SelectGame'
+import WordList from '../components/WordList'
 
 class WordSearch extends Component {
     render() {
-        const { dispatch, cells, selectedGame } = this.props;
+        const { dispatch, cells, selectedGame, wordList } = this.props;
 
         return (
-            <div style={{width:100+'%', textAlign:'center'}}>
+            <div style={{width:100+'%', textAlign:'center', fontFamily:'sans-serif'}}>
                 <Grid onCellClick={(xPos,yPos) =>
                                     dispatch(cellClickAction(xPos, yPos))
                                   } cells={cells}></Grid>
 
                 <div style={{display: 'inline-block'}}>
+                    <WordList wordList={wordList}/>
                     <SelectGame onGameSelect={(value) => dispatch(selectGameAction(value))}/>
                     <Start selectedGame={selectedGame} onStartGameClick={() =>
                             dispatch(startGameAction())}/>
@@ -28,8 +30,9 @@ class WordSearch extends Component {
 
 function select(state) {
     return {
-        cells: state.cells,
-        selectedGame:state.currentGame
+        cells: state.gamePlay.cells,
+        selectedGame: state.currentGame,
+        wordList: state.gamePlay.words
     };
 }
 
