@@ -5,9 +5,9 @@ export default class SelectGame extends Component {
         return (
                 <select onChange = {(e) => this.handleSelectChange(e)}>
                     <option value=""></option>
-                    <option value="board1">List 1</option>
-                    <option value="board2">List 2</option>
-                    <option value="board3">List 3</option>
+                    <option value="wordSet1">List 1</option>
+                    <option value="wordSet2">List 2</option>
+                    <option value="wordSet3">List 3</option>
                 </select>
         )
     }
