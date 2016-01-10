@@ -13,10 +13,10 @@ export function selectGameAction(changeValue) {
     }
 }
 
-export function cellClickAction(xPos, yPos) {
+export function cellClickAction(rowPos, columnPos) {
     return {
         type: CELL_CLICK,
-        xPos,
-        yPos
+        rowPos,
+        columnPos
     }
 }

@@ -12,8 +12,8 @@ class WordSearch extends Component {
 
         return (
             <div style={{width:100+'%', textAlign:'center', fontFamily:'sans-serif'}}>
-                <Grid onCellClick={(xPos,yPos) =>
-                                    dispatch(cellClickAction(xPos, yPos))
+                <Grid onCellClick={(rowPos,columnPos) =>
+                                    dispatch(cellClickAction(rowPos, columnPos))
                                   } cells={cells}></Grid>
 
                 <div style={{display: 'inline-block'}}>

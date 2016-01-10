@@ -6,10 +6,10 @@ export default class Row extends Component {
         return (
             <div>
                 {this.props.row.map((cell,index)=>
-                        <Cell key={cell.xPos+''+cell.yPos} xPos={cell.xPos}
-                              yPos={cell.yPos}
+                        <Cell key={cell.rowPos+''+cell.columnPos} rowPos={cell.rowPos}
+                              columnPos={cell.columnPos}
                               {...cell}
-                              onClick={() => this.props.onCellClick(cell.xPos, cell.yPos)}/>
+                              onClick={() => this.props.onCellClick(cell.rowPos, cell.columnPos)}/>
                     )}
             </div>
         )

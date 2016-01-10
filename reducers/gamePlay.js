@@ -48,15 +48,15 @@ function isLegalCellClick(state, action) {
 
 function cellSelectedUpdate(newState, state, action) {
     newState.cells = [
-        ...state.cells.slice(0, action.xPos),
-        Object.assign({}, state.cells[action.xPos]),
-        ...state.cells.slice(action.xPos + 1)
+        ...state.cells.slice(0, action.rowPos),
+        Object.assign({}, state.cells[action.rowPos]),
+        ...state.cells.slice(action.rowPos + 1)
     ];
-    newState.cells[action.xPos].row[action.yPos].selected = !newState.cells[action.xPos].row[action.yPos].selected;
+    newState.cells[action.rowPos].row[action.columnPos].selected = !state.cells[action.rowPos].row[action.columnPos].selected;
 }
 
 function lettersFoundUpdate(newState, state, action) {
-    let cell = newState.cells[action.xPos].row[action.yPos];
+    let cell = newState.cells[action.rowPos].row[action.columnPos];
     if (cell.selected) {
         // cell is now selected so should be added to the letters found array
         newState.lettersFound = state.lettersFound;

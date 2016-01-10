@@ -1,8 +1,8 @@
 export class Cell {
-    constructor(value, xPos, yPos, selected) {
+    constructor(value, rowPos, columnPos, selected) {
         this.value = value;
-        this.xPos = xPos;
-        this.yPos = yPos;
+        this.rowPos = rowPos;
+        this.columnPos = columnPos;
         this.selected=selected;
     }
 }
