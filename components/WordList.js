@@ -3,7 +3,6 @@ import Word from './Word'
 
 export default class WordList extends Component {
     render() {
-        console.log('wordList: ', this.props)
         return (
             <ul>
                 {this.props.wordList.map(word=>
