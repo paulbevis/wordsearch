@@ -1,6 +1,6 @@
 export const GAMES = {
-    'board1': {
-        'words': ['one', 'two', 'three'],
+    'wordSet1': {
+        'words': ['one', 'two', 'three', 'four','five','six','seven','eight','nine','ten'],
         'board': [
             ['o', 'n', 'e', '-', '-', '-'],
             ['t', 'w', 'o', '-', '-', '-'],
@@ -11,7 +11,7 @@ export const GAMES = {
         ]
     },
 
-    'board2': {
+    'wordSet2': {
         'words': ['four', 'five', 'six'],
         board: [
             ['f', 'o', 'u', 'r', '-', '-'],
@@ -19,6 +19,18 @@ export const GAMES = {
             ['s', 'i', 'x', '-', '-', '-'],
             ['-', '-', '-', '-', '-', '-'],
             ['-', '-', '-', '-', '-', '-'],
+            ['-', '-', '-', '-', '-', '-']
+        ]
+    },
+
+    'wordSet3': {
+        'words': ['seven', 'eight', 'nine'],
+        board: [
+            ['s', 'e', 'n', '-', '-', '-'],
+            ['e', 'i', 'i', '-', '-', '-'],
+            ['v', 'g', 'n', '-', '-', '-'],
+            ['e', 'h', 'e', '-', '-', '-'],
+            ['n', 't', '-', '-', '-', '-'],
             ['-', '-', '-', '-', '-', '-']
         ]
     }
