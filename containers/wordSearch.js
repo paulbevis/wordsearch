@@ -16,7 +16,7 @@ class WordSearch extends Component {
                                     dispatch(cellClickAction(rowPos, columnPos))
                                   } cells={cells}></Grid>
 
-                <div style={{display: 'inline-block'}}>
+                <div style={{display: 'inline-block',height:400+'px', minWidth:'100px'}}>
                     <WordList wordList={wordList}/>
                     <SelectGame onGameSelect={(value) => dispatch(selectGameAction(value))}/>
                     <Start selectedGame={selectedGame} onStartGameClick={() =>
