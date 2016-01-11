@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/paulbevis/wordsearch#readme",
   "dependencies": {
-    "parse": "^1.6.13",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
