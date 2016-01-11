@@ -18,9 +18,9 @@ class WordSearch extends Component {
 
                 <div style={{display: 'inline-block',height:400+'px', minWidth:'100px'}}>
                     <WordList wordList={wordList}/>
-                    <SelectGame onGameSelect={(value) => dispatch(selectGameAction(value))}/>
-                    <Start selectedGame={selectedGame} onStartGameClick={() =>
-                            dispatch(startGameAction())}/>
+                    <div style={{display: 'inline-block', height:'30px'}}>
+                        <SelectGame onGameSelect={(value) => dispatch(selectGameAction(value))}/>
+                    </div>
                 </div>
             </div>
         )
