@@ -77,6 +77,7 @@ describe('gamePlay reducer', () => {
         expectedState.lettersFound.push(cell);
         expect(gamePlay(state, {type: CELL_CLICK, rowPos: 1, columnPos: 4}).lettersFound).toEqual(expectedState.lettersFound)
     })
+
     it('second click, same cells, removes letters found', () => {
         let state = {
             cells: fillDefaultGrid([], '-'),
