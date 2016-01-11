@@ -12,33 +12,15 @@ const TOP_TO_BOTTOM = 'TOP_TO_BOTTOM';
 const WORD_DIRECTIONS = [LEFT_TO_RIGHT, TOP_TO_BOTTOM];
 
 export function fillDefaultGrid(cells, gridSet) {
-    for (var i = 0; i < GRID_WIDTH; i++) {
+    for (var rowPos = 0; rowPos < GRID_HEIGHT; rowPos++) {
         var row = [];
         cells.push({row});
-        for (var j = 0; j < GRID_HEIGHT; j++) {
-            var cell = new Cell(gridSet.charAt(Math.floor(Math.random() * gridSet.length)), i, j, false);
+        for (var columnPos = 0; columnPos < GRID_WIDTH; columnPos++) {
+            var cell = new Cell(gridSet.charAt(Math.floor(Math.random() * gridSet.length)), rowPos, columnPos, false);
             row.push(cell);
         }
     }
     return cells;
-}
-
-function generateGameGrid(action) {
-    let game = GAMES[action.changeValue];
-    if (game) {
-        let cells = [];
-        for (var i = 0; i < GRID_WIDTH; i++) {
-            var row = [];
-            cells.push({row});
-            for (var j = 0; j < GRID_HEIGHT; j++) {
-                var cell = new Cell(game.board[i][j], i, j, false);
-                row.push(cell);
-            }
-        }
-        return cells;
-    }
-    return fillDefaultGrid([], START_SET);
-
 }
 
 const initialState = {
@@ -116,7 +98,6 @@ export function gamePlay(state = initialState, action) {
             }
 
         case GAME_SELECT:
-            //newState.cells = generateGameGrid(action);
             words(newState, action);
             newState.lettersFound = [];
 
@@ -163,12 +144,22 @@ function addWordToGrid(newState, word) {
         wordPositions.map(characterPosition=>
             newState.cells[characterPosition.colPosition].row[characterPosition.rowPosition].value = characterPosition.letter
         )
-    } else{
+    } else {
         console.log("FAILED!!!!!!!!!!!!!!!!!")
     }
 
     return wordPositions;
 }
+function fillRemainingSpaces(newState, gridSet) {
+    for (var rowPos = 0; rowPos < GRID_HEIGHT; rowPos++) {
+        for (var columnPos = 0; columnPos < GRID_WIDTH; columnPos++) {
+            if (newState.cells[rowPos].row[columnPos].value === '-') {
+                newState.cells[rowPos].row[columnPos] = new Cell(gridSet.charAt(Math.floor(Math.random() * gridSet.length)), rowPos, columnPos, false);
+            }
+        }
+    }
+}
+
 
 function words(newState, action) {
     newState.cells = fillDefaultGrid([], START_SET);
@@ -181,5 +172,6 @@ function words(newState, action) {
         word.positionInGrid = addWordToGrid(newState, word);
         newState.words.push(word);
     });
+    fillRemainingSpaces(newState, CHAR_SET);
     return words;
 }
