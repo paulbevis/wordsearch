@@ -122,7 +122,7 @@ describe('gamePlay reducer', () => {
         state.grid.rows[1].cols[1].value = 'f';
         state.words.push({
             word: 'if', wordFound: false, positionInGrid: [
-                {'letter': 'i', 'colPosition': 1, 'rowPosition': 0},
+                {'letter': 'i', 'colPosition': 0, 'rowPosition': 1},
                 {'letter': 'f', 'colPosition': 1, 'rowPosition': 1}
             ]
         });
@@ -142,13 +142,18 @@ describe('gamePlay reducer', () => {
         expectedState.grid.rows[0].cols[2].value = 'n';
         expectedState.grid.rows[0].cols[2].selected = false;
         expectedState.grid.rows[0].cols[2].partOfWordFound = true;
-        expectedState.words.push({word: 'can', wordFound: true});
+        expectedState.words.push({
+            word: 'can', wordFound: true, positionInGrid: [
+                {'letter': 'c', 'colPosition': 0, 'rowPosition': 0},
+                {'letter': 'a', 'colPosition': 1, 'rowPosition': 0},
+                {'letter': 'n', 'colPosition': 2, 'rowPosition': 0}]
+        });
 
         expectedState.grid.rows[1].cols[0].value = 'i';
         expectedState.grid.rows[1].cols[1].value = 'f';
         expectedState.words.push({
             word: 'if', wordFound: false, positionInGrid: [
-                {'letter': 'i', 'colPosition': 1, 'rowPosition': 0},
+                {'letter': 'i', 'colPosition': 0, 'rowPosition': 1},
                 {'letter': 'f', 'colPosition': 1, 'rowPosition': 1}
             ]
         });
@@ -163,7 +168,7 @@ describe('gamePlay reducer', () => {
         //select next cell (n)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 2});
 
-        expect(state.grid).toEqual(expectedState.grid)
+        expect(state).toEqual(expectedState)
     })
 
     it('first and second letters in the reverse order, and match word', () => {
@@ -186,7 +191,7 @@ describe('gamePlay reducer', () => {
         state.grid.rows[1].cols[1].value = 'f';
         state.words.push({
             word: 'if', wordFound: false, positionInGrid: [
-                {'letter': 'i', 'colPosition': 1, 'rowPosition': 0},
+                {'letter': 'i', 'colPosition': 0, 'rowPosition': 1},
                 {'letter': 'f', 'colPosition': 1, 'rowPosition': 1}
             ]
         });
@@ -206,13 +211,17 @@ describe('gamePlay reducer', () => {
         expectedState.grid.rows[0].cols[2].value = 'n';
         expectedState.grid.rows[0].cols[2].selected = false;
         expectedState.grid.rows[0].cols[2].partOfWordFound = true;
-        expectedState.words.push({word: 'can', wordFound: true});
-
+        expectedState.words.push({
+            word: 'can', wordFound: true, positionInGrid: [
+                {'letter': 'c', 'colPosition': 0, 'rowPosition': 0},
+                {'letter': 'a', 'colPosition': 1, 'rowPosition': 0},
+                {'letter': 'n', 'colPosition': 2, 'rowPosition': 0}]
+        });
         expectedState.grid.rows[1].cols[0].value = 'i';
         expectedState.grid.rows[1].cols[1].value = 'f';
         expectedState.words.push({
             word: 'if', wordFound: false, positionInGrid: [
-                {'letter': 'i', 'colPosition': 1, 'rowPosition': 0},
+                {'letter': 'i', 'colPosition': 0, 'rowPosition': 1},
                 {'letter': 'f', 'colPosition': 1, 'rowPosition': 1}
             ]
         });
@@ -225,7 +234,7 @@ describe('gamePlay reducer', () => {
         //select next cell (c)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 0});
 
-        expect(state.grid).toEqual(expectedState.grid)
+        expect(state).toEqual(expectedState)
     })
 
 
