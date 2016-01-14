@@ -61,19 +61,13 @@ function wordsFoundUpdate(newState, state, action) {
     newState.words = state.words;
     if (newState.lettersFound.length > 1) {
         let wordMatch = false;
-        let posOfMatchedWord=0;
-        newState.words.map((word,index) => {
-            console.log('words: ',word.word, 'lettersfound: ',newState.lettersFound.length)
+        let posOfMatchedWord = 0;
+        newState.words.map((word, index) => {
                 let lettersMatched = 0;
                 if (word.word.length === newState.lettersFound.length) {
                     newState.lettersFound.map(letterCell=> {
 
                         if (word.positionInGrid.find(letterPosInWord => {
-                                    console.log('\nword.positionInGrid: ', letterPosInWord)
-                                    console.log('letterCell: ', letterCell)
-                                    console.log('result: ', (letterPosInWord.colPosition === letterCell.columnPos &&
-                                    letterPosInWord.rowPosition === letterCell.rowPos &&
-                                    letterPosInWord.letter === letterCell.value))
                                     return (letterPosInWord.colPosition === letterCell.columnPos &&
                                     letterPosInWord.rowPosition === letterCell.rowPos &&
                                     letterPosInWord.letter === letterCell.value)
@@ -82,23 +76,23 @@ function wordsFoundUpdate(newState, state, action) {
                             lettersMatched++;
                         }
                     });
-                    if (lettersMatched === word.word.length){
-                        wordMatch=true;
-                        posOfMatchedWord=index;
+                    if (lettersMatched === word.word.length) {
+                        wordMatch = true;
+                        posOfMatchedWord = index;
                     }
                 }
-            if (wordMatch) {
-                newState.words = [
-                    ...state.words.slice(0, posOfMatchedWord),
-                    Object.assign({}, state.words[posOfMatchedWord], {wordFound: !state.words[posOfMatchedWord].wordFound}),
-                    ...state.words.slice(posOfMatchedWord + 1)
-                ];
-                newState.lettersFound.map(letterCell=> {
-                    letterCell.partOfWordFound = true;
-                    letterCell.selected = false;
-                });
-                newState.lettersFound = [];
-            }
+                if (wordMatch) {
+                    newState.words = [
+                        ...state.words.slice(0, posOfMatchedWord),
+                        Object.assign({}, state.words[posOfMatchedWord], {wordFound: !state.words[posOfMatchedWord].wordFound}),
+                        ...state.words.slice(posOfMatchedWord + 1)
+                    ];
+                    newState.lettersFound.map(letterCell=> {
+                        letterCell.partOfWordFound = true;
+                        letterCell.selected = false;
+                    });
+                    newState.lettersFound = [];
+                }
             }
         );
 
@@ -158,7 +152,7 @@ function addWordToGrid(newState, word) {
         word.word.split('').map(character=> {
             // if location is untaken, or matches exact letter, then continue
             if (columnPos < GRID_WIDTH && rowPos < GRID_HEIGHT &&
-                (newState.grid.rows[columnPos].cols[rowPos].value === '-' || (newState.grid.rows[columnPos].cols[rowPos].value === character))) {
+                (newState.grid.rows[rowPos].cols[columnPos].value === '-' || (newState.grid.rows[rowPos].cols[columnPos].value === character))) {
                 wordPositions.push({'letter': character, 'colPosition': columnPos, 'rowPosition': rowPos});
                 columnPos = columnPos + columnAddition;
                 rowPos = rowPos + rowAddition;
@@ -170,7 +164,7 @@ function addWordToGrid(newState, word) {
     // now that word mapped, mark the grid.
     if (wordPositions.length == word.word.length) {
         wordPositions.map(characterPosition=>
-            newState.grid.rows[characterPosition.colPosition].cols[characterPosition.rowPosition].value = characterPosition.letter
+            newState.grid.rows[characterPosition.rowPosition].cols[characterPosition.colPosition].value = characterPosition.letter
         )
     } else {
         console.log("FAILED!!!!!!!!!!!!!!!!!")
