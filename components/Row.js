@@ -5,7 +5,7 @@ export default class Row extends Component {
     render() {
         return (
             <div>
-                {this.props.row.map((cell,index)=>
+                {this.props.cols.map((cell,index)=>
                         <Cell key={cell.rowPos+''+cell.columnPos} rowPos={cell.rowPos}
                               columnPos={cell.columnPos}
                               {...cell}

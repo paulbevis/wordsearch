@@ -8,13 +8,13 @@ import WordList from '../components/WordList'
 
 class WordSearch extends Component {
     render() {
-        const { dispatch, cells, selectedGame, wordList } = this.props;
+        const { dispatch, grid, selectedGame, wordList } = this.props;
 
         return (
             <div style={{width:100+'%', textAlign:'center', fontFamily:'sans-serif'}}>
                 <Grid onCellClick={(rowPos,columnPos) =>
                                     dispatch(cellClickAction(rowPos, columnPos))
-                                  } cells={cells}></Grid>
+                                  } grid={grid}></Grid>
 
                 <div style={{display: 'inline-block',height:400+'px', minWidth:'100px'}}>
                     <WordList wordList={wordList}/>
@@ -30,7 +30,7 @@ class WordSearch extends Component {
 
 function select(state) {
     return {
-        cells: state.gamePlay.cells,
+        grid: state.gamePlay.grid,
         selectedGame: state.currentGame,
         wordList: state.gamePlay.words
     };
