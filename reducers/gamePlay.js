@@ -11,20 +11,22 @@ const LEFT_TO_RIGHT = 'LEFT_TO_RIGHT';
 const TOP_TO_BOTTOM = 'TOP_TO_BOTTOM';
 const WORD_DIRECTIONS = [LEFT_TO_RIGHT, TOP_TO_BOTTOM];
 
-export function fillDefaultGrid(cells, gridSet) {
+export function fillDefaultGrid(grid, gridSet) {
+    var rows = [];
     for (var rowPos = 0; rowPos < GRID_HEIGHT; rowPos++) {
-        var row = [];
-        cells.push({row});
+        var cols = [];
+        rows.push({cols});
         for (var columnPos = 0; columnPos < GRID_WIDTH; columnPos++) {
             var cell = new Cell(gridSet.charAt(Math.floor(Math.random() * gridSet.length)), rowPos, columnPos, false);
-            row.push(cell);
+            cols.push(cell);
         }
     }
-    return cells;
+    grid = {rows};
+    return grid;
 }
 
 const initialState = {
-    cells: fillDefaultGrid([], START_SET),
+    grid: fillDefaultGrid({}, START_SET),
     words: [],
     lettersFound: []
 };
@@ -34,21 +36,22 @@ function isLegalCellClick(state, action) {
 }
 
 function cellSelectedUpdate(newState, state, action) {
-    newState.cells = [
-        ...state.cells.slice(0, action.rowPos),
-        Object.assign({}, state.cells[action.rowPos]),
-        ...state.cells.slice(action.rowPos + 1)
+    newState.grid.rows = [
+        ...state.grid.rows.slice(0, action.rowPos),
+        Object.assign({}, state.grid.rows[action.rowPos]),
+        ...state.grid.rows.slice(action.rowPos + 1)
     ];
-    newState.cells[action.rowPos].row[action.columnPos].selected = !state.cells[action.rowPos].row[action.columnPos].selected;
+    newState.grid.rows[action.rowPos].cols[action.columnPos].selected = !state.grid.rows[action.rowPos].cols[action.columnPos].selected;
 }
 
 function lettersFoundUpdate(newState, state, action) {
-    let cell = newState.cells[action.rowPos].row[action.columnPos];
+    let cell = newState.grid.rows[action.rowPos].cols[action.columnPos];
     if (cell.selected) {
         // cell is now selected so should be added to the letters found array
         newState.lettersFound = state.lettersFound;
         newState.lettersFound.push(cell);
     } else {
+        // the cell was selected, so now unselect it!
         newState.lettersFound = state.lettersFound;
         newState.lettersFound = state.lettersFound.filter(letterCell=> letterCell !== cell);
     }
@@ -57,29 +60,54 @@ function lettersFoundUpdate(newState, state, action) {
 function wordsFoundUpdate(newState, state, action) {
     newState.words = state.words;
     if (newState.lettersFound.length > 1) {
+        let wordMatch = false;
+        let posOfMatchedWord=0;
+        newState.words.map((word,index) => {
+            console.log('words: ',word.word, 'lettersfound: ',newState.lettersFound.length)
+                let lettersMatched = 0;
+                if (word.word.length === newState.lettersFound.length) {
+                    newState.lettersFound.map(letterCell=> {
 
-        let wordFound = newState.lettersFound.reduce((prev, curr) => prev + curr.value, '');
+                        if (word.positionInGrid.find(letterPosInWord => {
+                                    console.log('\nword.positionInGrid: ', letterPosInWord)
+                                    console.log('letterCell: ', letterCell)
+                                    console.log('result: ', (letterPosInWord.colPosition === letterCell.columnPos &&
+                                    letterPosInWord.rowPosition === letterCell.rowPos &&
+                                    letterPosInWord.letter === letterCell.value))
+                                    return (letterPosInWord.colPosition === letterCell.columnPos &&
+                                    letterPosInWord.rowPosition === letterCell.rowPos &&
+                                    letterPosInWord.letter === letterCell.value)
+                                }
+                            )) {
+                            lettersMatched++;
+                        }
+                    });
+                    if (lettersMatched === word.word.length){
+                        wordMatch=true;
+                        posOfMatchedWord=index;
+                    }
+                }
+            if (wordMatch) {
+                newState.words = [
+                    ...state.words.slice(0, posOfMatchedWord),
+                    Object.assign({}, state.words[posOfMatchedWord], {wordFound: !state.words[posOfMatchedWord].wordFound}),
+                    ...state.words.slice(posOfMatchedWord + 1)
+                ];
+                newState.lettersFound.map(letterCell=> {
+                    letterCell.partOfWordFound = true;
+                    letterCell.selected = false;
+                });
+                newState.lettersFound = [];
+            }
+            }
+        );
 
-        let posOfMatchedWord = state.words.findIndex(word=> wordFound === word.word && !word.wordFound)
-
-        if (posOfMatchedWord !== -1) {
-            newState.words = [
-                ...state.words.slice(0, posOfMatchedWord),
-                Object.assign({}, state.words[posOfMatchedWord], {wordFound: !state.words[posOfMatchedWord].wordFound}),
-                ...state.words.slice(posOfMatchedWord + 1)
-            ];
-            newState.lettersFound.map(letterCell=> {
-                letterCell.partOFWordFound = true;
-                letterCell.selected = false;
-            });
-            newState.lettersFound = [];
-        }
     }
 }
 
 
 export function gamePlay(state = initialState, action) {
-    let newState = {};
+    let newState = {'grid': {}};
     switch (action.type) {
         case CELL_CLICK:
             if (isLegalCellClick(state, action)) {
@@ -130,7 +158,7 @@ function addWordToGrid(newState, word) {
         word.word.split('').map(character=> {
             // if location is untaken, or matches exact letter, then continue
             if (columnPos < GRID_WIDTH && rowPos < GRID_HEIGHT &&
-                (newState.cells[columnPos].row[rowPos].value === '-' || (newState.cells[columnPos].row[rowPos].value === character))) {
+                (newState.grid.rows[columnPos].cols[rowPos].value === '-' || (newState.grid.rows[columnPos].cols[rowPos].value === character))) {
                 wordPositions.push({'letter': character, 'colPosition': columnPos, 'rowPosition': rowPos});
                 columnPos = columnPos + columnAddition;
                 rowPos = rowPos + rowAddition;
@@ -142,7 +170,7 @@ function addWordToGrid(newState, word) {
     // now that word mapped, mark the grid.
     if (wordPositions.length == word.word.length) {
         wordPositions.map(characterPosition=>
-            newState.cells[characterPosition.colPosition].row[characterPosition.rowPosition].value = characterPosition.letter
+            newState.grid.rows[characterPosition.colPosition].cols[characterPosition.rowPosition].value = characterPosition.letter
         )
     } else {
         console.log("FAILED!!!!!!!!!!!!!!!!!")
@@ -153,8 +181,8 @@ function addWordToGrid(newState, word) {
 function fillRemainingSpaces(newState, gridSet) {
     for (var rowPos = 0; rowPos < GRID_HEIGHT; rowPos++) {
         for (var columnPos = 0; columnPos < GRID_WIDTH; columnPos++) {
-            if (newState.cells[rowPos].row[columnPos].value === '-') {
-                newState.cells[rowPos].row[columnPos] = new Cell(gridSet.charAt(Math.floor(Math.random() * gridSet.length)), rowPos, columnPos, false);
+            if (newState.grid.rows[rowPos].cols[columnPos].value === '-') {
+                newState.grid.rows[rowPos].cols[columnPos] = new Cell(gridSet.charAt(Math.floor(Math.random() * gridSet.length)), rowPos, columnPos, false);
             }
         }
     }
@@ -162,7 +190,7 @@ function fillRemainingSpaces(newState, gridSet) {
 
 
 function words(newState, action) {
-    newState.cells = fillDefaultGrid([], START_SET);
+    newState.grid = fillDefaultGrid([], START_SET);
     newState.words = [];
     let game = GAMES[action.changeValue];
     game.words.map(wordStr=> {
