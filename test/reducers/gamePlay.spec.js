@@ -162,14 +162,22 @@ describe('gamePlay reducer', () => {
         //select cell (c)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 0});
 
+        expectedState.lettersFound = [new Cell('c', 0, 0, true)];
+        //check letters found, as it will removed on complete word match
+        expect(state.lettersFound).toEqual(expectedState.lettersFound);
+
         //select next cell (a)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 1});
+        expectedState.lettersFound.push(new Cell('a', 0, 1, true));
+        //check letters found, as it will removed on complete word match
+        expect(state.lettersFound).toEqual(expectedState.lettersFound);
 
         //select next cell (n)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 2});
-
+        // when word has been mateched the lettersFound array is reset
+        expectedState.lettersFound = [];
         expect(state).toEqual(expectedState)
-    })
+    });
 
     it('first and second letters in the reverse order, and match word', () => {
         let state = {
@@ -227,13 +235,19 @@ describe('gamePlay reducer', () => {
         });
         //select cell (n)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 2});
+        expectedState.lettersFound = [new Cell('n', 0, 2, true)];
+        expect(state.lettersFound).toEqual(expectedState.lettersFound);
+
 
         //select next cell (a)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 1});
+        expectedState.lettersFound.push(new Cell('a', 0, 1, true));
+        expect(state.lettersFound).toEqual(expectedState.lettersFound);
 
         //select next cell (c)
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 0});
-
+        // when word has been mateched the lettersFound array is reset
+        expectedState.lettersFound = [];
         expect(state).toEqual(expectedState)
     })
 
