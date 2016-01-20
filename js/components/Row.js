@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Cell from './Cell'
-import {MAX_GRID_HEIGHT,MAX_GRID_WIDTH} from '../constants/data'
+import {MAX_GRID_WIDTH} from '../constants/data'
 
 export default class Row extends Component {
     provideDummyCells(keyPefix) {
