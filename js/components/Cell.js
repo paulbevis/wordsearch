@@ -13,14 +13,13 @@ export default class Cell extends Component {
             lineHeight: 40 + 'px',
             fontSize: 30 + 'px',
             textAlign: 'center',
-            'fontFamily': 'sans-serif',
+            //'fontFamily': 'sans-serif',
             'cursor': 'pointer'
         };
 
 
         return (
-            <div className="col span_1_of_10" onClick={this.props.onClick}
-                 style={myStyle}>
+            <div className="col span_1_of_10" onClick={this.props.onClick} style={myStyle}>
                 {this.props.value}
             </div>
         )
