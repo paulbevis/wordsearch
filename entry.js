@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import WordSearch from './containers/wordSearch'
+import WordSearch from './js/containers/wordSearch'
 
 
 import { createStore } from 'redux'
-import wordSearchAppReducers from './reducers/wordSearch'
+import wordSearchAppReducers from './js/reducers/wordSearch'
 const store = createStore(wordSearchAppReducers);
 
 render(
