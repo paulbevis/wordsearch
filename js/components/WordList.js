@@ -10,16 +10,18 @@ export default class WordList extends Component {
             //justifyContent: 'center',
             //alignContent: 'center',
             //alignItems: 'center',
-            height: '492px',
+            //height: '492px',
             //textAlign: 'center',
             background: '#00b2ed'
         };
         return (
             <div className="col span_3_of_12" style={style}>
-                {
-                    this.props.wordList.map(word=>
-                        <Word key={word.word} {...word}/>)
-                }
+                <div className="section group">
+                    {
+                        this.props.wordList.map(word=>
+                            <Word key={word.word} {...word}/>)
+                    }
+                </div>
             </div>
         )
     }
