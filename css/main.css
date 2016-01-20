@@ -1,0 +1,23 @@
+body {
+    background: lightgray;
+    font-family: sans-serif;
+}
+
+.title {
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.framework {
+    width: 680px;
+    height: 500px;
+    background: #0cc3ff
+}
+
+.title {
+    color: white;
+}
+
+#root {
+    background: green;
+}
