@@ -22,8 +22,8 @@ export default class Grid extends Component {
 
     render() {
         return (
-            <div className="col span_9_of_12" style={{background: 'white'}}>
-                <div className="section group" style={{background: 'white'}}>
+            <div className="col span_9_of_12" style={{}}>
+                <div className="section group" style={{background:'#0cc3ff'}}>
                     {this.provideDummyRows('b')}
                     {this.props.grid.rows.map((row, index)=>
                         <Row key={index} onCellClick={this.props.onCellClick} {...row} />)

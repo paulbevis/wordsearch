@@ -5,7 +5,7 @@ export default class WordList extends Component {
 
     render() {
         const style = {
-            background: '#00b2ed'
+            background: '#0cc3ff'
         };
         return (
             <div className="col span_3_of_12" style={style}>
