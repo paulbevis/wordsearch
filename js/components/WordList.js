@@ -5,13 +5,6 @@ export default class WordList extends Component {
 
     render() {
         const style = {
-            //display: 'flex',
-            //flexFlow: 'column nowrap',
-            //justifyContent: 'center',
-            //alignContent: 'center',
-            //alignItems: 'center',
-            //height: '492px',
-            //textAlign: 'center',
             background: '#00b2ed'
         };
         return (
