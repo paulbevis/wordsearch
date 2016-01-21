@@ -11,8 +11,8 @@ export default class WordList extends Component {
             <div className="col span_3_of_12" style={style}>
                 <div className="section group">
                     {
-                        this.props.wordList.map(word=>
-                            <Word key={word.word} {...word}/>)
+                        this.props.wordList.map((word, index)=>
+                            <Word key={word.word+index} {...word}/>)
                     }
                 </div>
             </div>

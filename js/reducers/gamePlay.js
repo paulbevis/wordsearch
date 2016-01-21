@@ -25,9 +25,19 @@ export function fillDefaultGrid(grid, gridSet, gridWidth = MAX_GRID_WIDTH, gridH
     return grid;
 }
 
+function initialWords() {
+    let words = [];
+    while (words.length < 10) {
+        let word = {};
+        word.word = '-';
+        word.wordFound = false;
+        words.push(word)
+    }
+    return words;
+}
 const initialState = {
     grid: fillDefaultGrid({}, START_SET, 6, 6),
-    words: [],
+    words: initialWords(),
     lettersFound: [],
     sound: {play: false}
 };
