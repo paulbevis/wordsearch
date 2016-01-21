@@ -3,6 +3,6 @@ export class Cell {
         this.value = value;
         this.rowPos = rowPos;
         this.columnPos = columnPos;
-        this.selected=selected;
+        this.selected = selected;
     }
 }
