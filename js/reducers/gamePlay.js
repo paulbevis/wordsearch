@@ -1,6 +1,7 @@
 import {Cell} from '../domain/components'
 import {CELL_CLICK, GAME_START, GAME_SELECT} from '../constants/actionTypes'
 import {GAMES} from '../constants/data'
+import {MAX_GRID_WIDTH, MAX_GRID_HEIGHT} from '../constants/data'
 
 
 const CHAR_SET = "abcdefghijklmnopqrstuvwxyz";
@@ -10,7 +11,7 @@ const LEFT_TO_RIGHT = 'LEFT_TO_RIGHT';
 const TOP_TO_BOTTOM = 'TOP_TO_BOTTOM';
 const WORD_DIRECTIONS = [LEFT_TO_RIGHT, TOP_TO_BOTTOM];
 
-export function fillDefaultGrid(grid, gridSet, gridWidth, gridHeight) {
+export function fillDefaultGrid(grid, gridSet, gridWidth = MAX_GRID_WIDTH, gridHeight = MAX_GRID_HEIGHT) {
     var rows = [];
     for (var rowPos = 0; rowPos < gridHeight; rowPos++) {
         var cols = [];
@@ -60,7 +61,7 @@ function wordsFoundUpdate(newState, state, action) {
         let posOfMatchedWord = 0;
         newState.words.map((word, index) => {
                 let lettersMatched = 0;
-                if (word.word.length === newState.lettersFound.length) {
+                if (word.word.length === newState.lettersFound.length && !word.wordFound) {
                     newState.lettersFound.map(letterCell=> {
 
                         if (word.positionInGrid.find(letterPosInWord => {
@@ -178,8 +179,8 @@ function addWordToGrid(newState, word) {
     }
     let wordComplete = 0;
     //repeat until either the word is placed or it gives up on a 1000 iterations
-        let gridWidth = newState.grid.rows[0].cols.length;
-        let gridHeight = newState.grid.rows.length;
+    let gridWidth = newState.grid.rows[0].cols.length;
+    let gridHeight = newState.grid.rows.length;
     while (wordPositions.length !== word.word.length && wordComplete < 1000) {
         //random starting point
         let columnPos = Math.floor(Math.random() * gridWidth);
