@@ -3,6 +3,15 @@ import Word from './Word'
 
 export default class WordList extends Component {
 
+    padRows(numberOfWords) {
+        let divs = [];
+        while (numberOfWords < 10) {
+            divs.push(<div key={'word-pad'+numberOfWords} style={{height: '40px', marginTop: '5px', marginBottom: '5px'}}></div>);
+            numberOfWords++;
+        }
+        return divs;
+    }
+
     render() {
         const style = {
             background: '#0cc3ff'
@@ -14,6 +23,7 @@ export default class WordList extends Component {
                         this.props.wordList.map((word, index)=>
                             <Word key={word.word+index} {...word}/>)
                     }
+                    {this.padRows(this.props.wordList.length)}
                 </div>
             </div>
         )
