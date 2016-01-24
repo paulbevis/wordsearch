@@ -35,6 +35,7 @@ function initialWords() {
     }
     return words;
 }
+
 const initialState = {
     grid: fillDefaultGrid({}, START_SET, 6, 6),
     words: initialWords(),
@@ -91,7 +92,7 @@ function wordsFoundUpdate(newState, state, action) {
                 if (wordMatch) {
                     newState.words = [
                         ...state.words.slice(0, posOfMatchedWord),
-                        Object.assign({}, state.words[posOfMatchedWord], {wordFound: !state.words[posOfMatchedWord].wordFound}),
+                        Object.assign({}, state.words[posOfMatchedWord], {wordFound: true}),
                         ...state.words.slice(posOfMatchedWord + 1)
                     ];
                     newState.lettersFound.map(letterCell=> {
@@ -177,49 +178,48 @@ export function gamePlay(state = initialState, action) {
     }
 }
 
-function addWordToGrid(newState, word) {
-    let wordDirection = Math.floor(Math.random() * 2);
-
-    let wordPositions = [];
-    let columnAddition = 1;
-    let rowAddition = 0;
-    if (WORD_DIRECTIONS[wordDirection] == TOP_TO_BOTTOM) {
-        columnAddition = 0;
-        rowAddition = 1;
+function getStartingPoint(word) {
+    let cellChoice;
+    //console.log('len: ', word.possiblePositions.length)
+    let arrayLen = word.possiblePositions.length;
+    if (arrayLen !== 0) {
+        let cellChoiceNumber = Math.floor(Math.random() * arrayLen);
+        cellChoice = word.possiblePositions.splice(cellChoiceNumber, 1)[0];
+        return cellChoice
     }
+    return cellChoice;
+}
+function addWordToGrid(newState, word, gridWidth, gridHeight) {
+    let result = true;
+    let wordPositions = [];
     let wordComplete = 0;
     //repeat until either the word is placed or it gives up on a 1000 iterations
-    let gridWidth = newState.grid.rows[0].cols.length;
-    let gridHeight = newState.grid.rows.length;
-    while (wordPositions.length !== word.word.length && wordComplete < 1000) {
-        //random starting point
-        let columnPos = Math.floor(Math.random() * gridWidth);
-        let rowPos = Math.floor(Math.random() * gridHeight);
+    while (wordPositions.length !== word.word.length && word.possiblePositions.length !== 0) {
+
+        let startingPoint = getStartingPoint(word);
+
         //reset words found in grid
         wordPositions = [];
         // cycle through word, character by character
         word.word.split('').map(character=> {
             // if location is untaken, or matches exact letter, then continue
-            if (columnPos < gridWidth && rowPos < gridHeight &&
-                (newState.grid.rows[rowPos].cols[columnPos].value === '-' || (newState.grid.rows[rowPos].cols[columnPos].value === character))) {
-                wordPositions.push({'letter': character, 'colPosition': columnPos, 'rowPosition': rowPos});
-                columnPos = columnPos + columnAddition;
-                rowPos = rowPos + rowAddition;
+            if (startingPoint.columnPos < gridWidth && startingPoint.rowPos < gridHeight &&
+                (newState.grid.rows[startingPoint.rowPos].cols[startingPoint.columnPos].value === '-' ||
+                (newState.grid.rows[startingPoint.rowPos].cols[startingPoint.columnPos].value === character))) {
+                wordPositions.push({'letter': character, 'colPosition': startingPoint.columnPos, 'rowPosition': startingPoint.rowPos});
+                startingPoint.columnPos = startingPoint.columnPos + startingPoint.columnAddition;
+                startingPoint.rowPos = startingPoint.rowPos + startingPoint.rowAddition;
             }
-            wordComplete++;
         });
     }
-
     // now that word mapped, mark the grid.
-    if (wordPositions.length == word.word.length) {
-        wordPositions.map(characterPosition=>
-            newState.grid.rows[characterPosition.rowPosition].cols[characterPosition.colPosition].value = characterPosition.letter
-        )
+    if (wordPositions.length === word.word.length) {
+        word.positionInGrid = wordPositions;
     } else {
-        console.log("FAILED!!!!!!!!!!!!!!!!!")
+        result = false;
     }
 
-    return wordPositions;
+    return result;
 }
 function fillRemainingSpaces(newState, gridSet, gridWidth, gridHeight) {
     for (var rowPos = 0; rowPos < gridHeight; rowPos++) {
@@ -231,18 +231,71 @@ function fillRemainingSpaces(newState, gridSet, gridWidth, gridHeight) {
     }
 }
 
+function possisblePositions(gridHeight, gridWidth) {
+    let words = [];
+    for (var rowPos = 0; rowPos < gridHeight; rowPos++) {
+        for (var columnPos = 0; columnPos < gridWidth; columnPos++) {
+            words.push({columnPos, rowPos, direction: LEFT_TO_RIGHT, columnAddition: 1, rowAddition: 0});
+            words.push({columnPos, rowPos, direction: TOP_TO_BOTTOM, columnAddition: 0, rowAddition: 1});
+        }
+    }
+    return words;
+}
+function buildWords(donorWordsArray, gridWidth, gridHeight) {
+    let wordsToBeFound = [];
+    donorWordsArray.map(wordStr=> {
+            let wordsObj = {};
+            wordsObj.possiblePositions = possisblePositions(gridHeight, gridWidth);
+            wordsObj.word = wordStr;
+            wordsObj.wordFound = false;
+            wordsToBeFound.push(wordsObj);
+        }
+    );
+    return wordsToBeFound;
+}
 
 function words(newState, action) {
     let game = GAMES[action.changeValue];
     newState.grid = fillDefaultGrid([], START_SET, game.gridWidth, game.gridHeight);
     newState.words = [];
-    game.words.map(wordStr=> {
-        let word = {};
-        word.word = wordStr;
-        word.wordFound = false;
-        word.positionInGrid = addWordToGrid(newState, word);
-        newState.words.push(word);
-    });
+
+    let words = buildWords(game.words, game.gridWidth, game.gridHeight);
+    let counter = 0;
+    while (counter !== -1 && counter < words.length) {
+        let word = words[counter];
+        let result = addWordToGrid(newState, word, game.gridWidth, game.gridHeight);
+        if (result) {
+            if (newState.words.indexOf(word) === -1) {
+                newState.words.push(word);
+            }
+            newState.words.map(wordObj=> {
+                wordObj.positionInGrid.map(characterPosition=>
+                    newState.grid.rows[characterPosition.rowPosition].cols[characterPosition.colPosition].value = characterPosition.letter
+                );
+            });
+            counter++
+        } else {
+            // there was no match, so reset data, and go back and reposition previous word.
+            word.possiblePositions = possisblePositions(game.gridHeight, game.gridWidth);
+            counter--;
+            if (counter !== -1) {
+                newState.words[counter].wordFound = false;
+                newState.words[counter].positionInGrid = [];
+            }
+
+            //wipe the grid now, then build up to the previous count words and start again!
+            newState.grid = fillDefaultGrid([], START_SET, game.gridWidth, game.gridHeight);
+            let tempCounter = 0;
+            while (tempCounter < counter) {
+                let wordObj = newState.words[tempCounter];
+                wordObj.positionInGrid.map(characterPosition=>
+                    newState.grid.rows[characterPosition.rowPosition].cols[characterPosition.colPosition].value = characterPosition.letter
+                );
+                tempCounter++;
+            }
+        }
+    }
+
     fillRemainingSpaces(newState, CHAR_SET, game.gridWidth, game.gridHeight);
     return words;
 }

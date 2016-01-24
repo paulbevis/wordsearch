@@ -9,7 +9,48 @@ describe('gamePlay reducer', () => {
     it('should handle initial state', () => {
         let state = {
             grid: fillDefaultGrid({}, '-', 6, 6),
-            words: [],
+            words: [
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                },
+                {
+                    "word": "-",
+                    "wordFound": false
+                }
+            ],
             lettersFound: [],
             "sound": {
                 "play": false
@@ -325,10 +366,10 @@ describe('gamePlay reducer', () => {
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 2});
         let cell2 = new Cell('a', 0, 1, true);
         cell2.partOfWordFound = true;
-        expectedState.grid.rows[0].cols[1]=cell2;
+        expectedState.grid.rows[0].cols[1] = cell2;
         let cell3 = new Cell('n', 0, 2, true);
         cell3.partOfWordFound = true;
-        expectedState.grid.rows[0].cols[2]=cell3;
+        expectedState.grid.rows[0].cols[2] = cell3;
         expectedState.lettersFound.push(cell2);
         expectedState.lettersFound.push(cell3);
 
@@ -527,6 +568,24 @@ describe('gamePlay reducer', () => {
 
 
     })
+
+    it('should be able to find all words in any grid', () => {
+            let boardNumber = 1;
+            while (boardNumber < 2) {
+
+                let state = gamePlay(undefined, {type: GAME_SELECT, changeValue: 'wordSet' + boardNumber});
+
+                state.words.map((wordObj)=> {
+                    wordObj.positionInGrid.map((cellPosObj)=> {
+                        state = gamePlay(state, {type: CELL_CLICK, rowPos: cellPosObj.rowPosition, columnPos: cellPosObj.colPosition})
+                    })
+                })
+                let wordsFoundArray = state.words.filter(word=>word.wordFound)
+                expect(wordsFoundArray.length).toEqual(state.words.length)
+                boardNumber++;
+            }
+        }
+    )
 
 
 });
