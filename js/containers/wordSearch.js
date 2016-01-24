@@ -4,6 +4,7 @@ import {cellClickAction, startGameAction, selectGameAction, soundPlayedAction} f
 import Grid from '../components/Grid'
 import Start from '../components/Start'
 import SelectGame from '../components/SelectGame'
+import GameSelection from '../components/GameSelection'
 import WordList from '../components/WordList'
 import PlaySound from '../components/PlaySound'
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -17,17 +18,17 @@ class WordSearch extends Component {
                 <div className="col span_12_of_12">
                     <div className="section group" style={{ }}>
 
-                            <Grid onCellClick={(rowPos,columnPos) =>
+                        <Grid onCellClick={(rowPos,columnPos) =>
                                     dispatch(cellClickAction(rowPos, columnPos))
                                   } grid={grid}/>
 
-                            <WordList wordList={wordList}/>
+                        <WordList wordList={wordList}/>
 
                     </div>
                 </div>
                 <div className="section group">
-                    <div className="col span_12_of_12" style={{height:'50px', background:'yellow'}}>
-                        <SelectGame onGameSelect={(value) => dispatch(selectGameAction(value))}/>
+                    <div className="col span_12_of_12" style={{marginTop:'-5px'}}>
+                        <GameSelection onGameSelect={(value) => dispatch(selectGameAction(value))}/>
                     </div>
                 </div>
                 <PlaySound sound={sound} onSoundPlayed={() => dispatch(soundPlayedAction())}/>
