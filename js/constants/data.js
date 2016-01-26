@@ -3,7 +3,7 @@ export const MAX_GRID_HEIGHT = 10;
 export const GAMES = {
     //GOLD
     'wordSet1': {
-        'words': ['and', 'is', 'of', 'the', 'in', 'it', 'like', 'we'],
+        'words': ['and', 'is', 'of', 'the', 'in', 'it', 'like', 'we', 'I', 'a'],
         gridWidth: 6,
         gridHeight: 6
     },
