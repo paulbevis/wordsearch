@@ -67,7 +67,7 @@ function lettersFoundUpdate(newState, state, action) {
 
 function wordsFoundUpdate(newState, state, action) {
     newState.words = state.words;
-    if (newState.lettersFound.length > 1) {
+    if (newState.lettersFound.length >= 1) {
         let wordMatch = false;
         let posOfMatchedWord = 0;
         newState.words.map((word, index) => {
