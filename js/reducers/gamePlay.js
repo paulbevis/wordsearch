@@ -1,7 +1,6 @@
-import {Cell} from '../domain/components'
-import {CELL_CLICK, GAME_START, GAME_SELECT} from '../constants/actionTypes'
-import {GAMES} from '../constants/data'
-import {MAX_GRID_WIDTH, MAX_GRID_HEIGHT} from '../constants/data'
+import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT} from '../constants/actionTypes'
+import {MAX_GRID_WIDTH, MAX_GRID_HEIGHT, START_SET} from '../constants/data'
+import createBoard,{fillDefaultGrid} from './boardCreator'
 
 
 function initialWords() {
@@ -77,6 +76,7 @@ function wordsFoundUpdate(newState, state, action) {
                     newState.lettersFound.map(letterCell=> {
                         letterCell.partOfWordFound = true;
                         letterCell.selected = false;
+                        letterCell.explode = true;
                     });
                     newState.lettersFound = [];
                     newState.sound = Object.assign({}, {play: true, type: 'success'});

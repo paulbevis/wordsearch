@@ -26,7 +26,8 @@ export default class Row extends Component {
                     <Cell key={cell.rowPos + '' + cell.columnPos} rowPos={cell.rowPos}
                           columnPos={cell.columnPos}
                         {...cell}
-                          onClick={() => this.props.onCellClick(cell.rowPos, cell.columnPos)}/>
+                          onClick={() => this.props.onCellClick(cell.rowPos, cell.columnPos)}
+                          onCellExplosionFragment={this.props.onCellExplosionFragment}/>
                 )}
                 {this.provideDummyCells('a')}
             </div>

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import {cellClickAction, startGameAction, selectGameAction, soundPlayedAction} from '../actions/wordSearch'
+import {cellClickAction, startGameAction, selectGameAction, cellExplosionFragmentAction} from '../actions/wordSearch'
 import Grid from '../components/Grid'
 import Start from '../components/Start'
 import SelectGame from '../components/SelectGame'
@@ -18,9 +18,9 @@ class WordSearch extends Component {
                 <div className="col span_12_of_12">
                     <div className="section group" style={{ }}>
 
-                        <Grid onCellClick={(rowPos,columnPos) =>
-                                    dispatch(cellClickAction(rowPos, columnPos))
-                                  } grid={grid}/>
+                        <Grid onCellClick={(rowPos,columnPos) =>dispatch(cellClickAction(rowPos, columnPos))}
+                              grid={grid}
+                              onCellExplosionFragment={(rowPos,columnPos)=>dispatch(cellExplosionFragmentAction(rowPos,columnPos))}/>
 
                         <WordList wordList={wordList}/>
 
