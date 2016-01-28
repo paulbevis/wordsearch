@@ -1,3 +1,4 @@
+//No longer used
 import React, { Component, PropTypes } from 'react'
 
 export default class SelectGame extends Component {
