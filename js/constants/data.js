@@ -1,5 +1,10 @@
 export const MAX_GRID_WIDTH = 10;
 export const MAX_GRID_HEIGHT = 10;
+export const START_SET = "-";
+export const LEFT_TO_RIGHT = 'LEFT_TO_RIGHT';
+export const TOP_TO_BOTTOM = 'TOP_TO_BOTTOM';
+export const CHAR_SET = "abcdefghijklmnopqrstuvwxyz";
+
 export const GAMES = {
     //GOLD
     'wordSet1': {
