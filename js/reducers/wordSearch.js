@@ -14,8 +14,6 @@ export function currentGame(state = '', action) {
 
 const wordSearchAppReducers = combineReducers({
     gamePlay,
-    //lettersFound,
-    //words,
     currentGame
 });
 
