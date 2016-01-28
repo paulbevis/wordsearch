@@ -31,7 +31,7 @@ class WordSearch extends Component {
                         <GameSelection onGameSelect={(value) => dispatch(selectGameAction(value))}/>
                     </div>
                 </div>
-                <PlaySound sound={sound} onSoundPlayed={() => dispatch(soundPlayedAction())}/>
+                <PlaySound sound={sound}/>
             </div>
         )
     }
