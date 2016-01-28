@@ -21,3 +21,621 @@ body {
 #root {
     background: #00b2ed;
 }
+
+div.box {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+}
+
+@keyframes anim-1 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 42px;
+        left: 76px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(1) {
+    left: 0;
+    animation-duration: 1.0s;
+    animation-name: anim-1;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #ff2b00;
+}
+
+@keyframes anim-2 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 51px;
+        left: 71px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(2) {
+    left: 10px;
+    animation-duration: 1.0s;
+    animation-name: anim-2;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #ff5500;
+}
+
+@keyframes anim-3 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 30px;
+        left: 77px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(3) {
+    left: 20px;
+    animation-duration: 1.0s;
+    animation-name: anim-3;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #ff8000;
+}
+
+@keyframes anim-4 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: -19px;
+        left: 90px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(4) {
+    left: 30px;
+    animation-duration: 1.0s;
+    animation-name: anim-4;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #ffaa00;
+}
+
+@keyframes anim-5 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 75px;
+        left: 82px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(5) {
+    top: 10px;
+    left: 0;
+    animation-duration: 1.0s;
+    animation-name: anim-5;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #ffd500;
+}
+
+@keyframes anim-6 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 26px;
+        left: 69px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(6) {
+    top: 10px;
+    left: 10px;
+    animation-duration: 1.0s;
+    animation-name: anim-6;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: yellow;
+}
+
+@keyframes anim-7 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: -10px;
+        left: -38px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(7) {
+    top: 10px;
+    left: 20px;
+    animation-duration: 1.0s;
+    animation-name: anim-7;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #d5ff00;
+}
+
+@keyframes anim-8 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: -75px;
+        left: 40px;
+    }
+    100% {
+        width:0;
+        height:0;
+    }
+}
+div.box:nth-child(8) {
+    top: 10px;
+    left: 30px;
+    animation-duration: 1.0s;
+    animation-name: anim-8;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    background: #aaff00;
+}
+
+@keyframes anim-9 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: -43px;
+        left: -34px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(9) {
+    top: 20px;
+    left: 0;
+    animation-duration: 1.0s;
+    animation-name: anim-9;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #80ff00;
+}
+
+@keyframes anim-10 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: -70px;
+        left: -74px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(10) {
+    top: 20px;
+    left: 10px;
+    animation-duration: 1.0s;
+    animation-name: anim-10;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #55ff00;
+}
+
+@keyframes anim-11 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 6px;
+        left: -66px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(11) {
+    top: 20px;
+    left: 20px;
+    animation-duration: 1.0s;
+    animation-name: anim-11;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #2bff00;
+}
+
+@keyframes anim-12 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 19px;
+        left: -89px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(12) {
+    top: 20px;
+    left: 30px;
+    animation-duration: 1.0s;
+    animation-name: anim-12;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: lime;
+}
+
+@keyframes anim-13 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: -11px;
+        left: 15px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(13) {
+    top: 30px;
+    left: 0;
+    animation-duration: 1.0s;
+    animation-name: anim-13;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #0055ff;
+}
+
+@keyframes anim-14 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 65px;
+        left: 46px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(14) {
+    top: 30px;
+    left: 10px;
+    animation-duration: 1.0s;
+    animation-name: anim-14;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #00ff55;
+}
+
+@keyframes anim-15 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: -13px;
+        left: 17px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(15) {
+    top: 30px;
+    left: 20px;
+    animation-duration: 1.0s;
+    animation-name: anim-15;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #00ff80;
+}
+
+@keyframes anim-16 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 54px;
+        left: -75px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(16) {
+    top: 30px;
+    left: 30px;
+    animation-duration: 1.0s;
+    animation-name: anim-16;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #2b00ff;
+}
+
+@keyframes anim-17 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 3px;
+        left: 270px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(17) {
+    /*left: 170px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-17;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #00ffd5;
+}
+
+@keyframes anim-18 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 100px;
+        left: 69px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(18) {
+    /*left: 180px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-18;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: cyan;
+}
+
+@keyframes anim-19 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 242px;
+        left: 483px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(19) {
+    /*left: 190px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-19;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #00d5ff;
+}
+
+@keyframes anim-20 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 234px;
+        left: 266px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(20) {
+    /*left: 200px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-20;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #00aaff;
+}
+
+@keyframes anim-21 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 88px;
+        left: 29px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(21) {
+    /*left: 210px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-21;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #0080ff;
+}
+
+@keyframes anim-22 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 148px;
+        left: 3px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(22) {
+    /*left: 220px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-22;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #0055ff;
+}
+
+@keyframes anim-23 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 48px;
+        left: 383px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(23) {
+    /*left: 230px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-23;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #002bff;
+}
+
+@keyframes anim-24 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 291px;
+        left: 309px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(24) {
+    /*left: 240px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-24;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: blue;
+}
+
+@keyframes anim-25 {
+    0% {
+        top: 50%;
+        left: 50%;
+    }
+    99% {
+        top: 206px;
+        left: 152px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+div.box:nth-child(25) {
+    /*left: 250px;*/
+    animation-duration: 1.0s;
+    animation-name: anim-25;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: ease-in-out;
+    background: #2b00ff;
+}
