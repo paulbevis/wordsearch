@@ -36,5 +36,6 @@ export default class Cell extends Component {
 }
 
 Cell.propTypes = {
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    onCellExplosionFragment: PropTypes.func.isRequired
 };
