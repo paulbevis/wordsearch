@@ -6,6 +6,7 @@ export default class PlaySound extends Component {
             <div>
                 <audio src="audio/success.m4a" preload="auto" ref="success"/>
                 <audio src="audio/warning.m4a" preload="auto" ref="warning"/>
+                <audio src="audio/applause.mp3" preload="auto" ref="congratulations"/>
                 {this.playSound()}
             </div>
         )
@@ -21,6 +22,9 @@ export default class PlaySound extends Component {
                     break;
                 case 'warning':
                     this.refs.warning.play();
+                    break;
+                case 'congratulations':
+                    this.refs.congratulations.play();
                     break;
             }
         }
