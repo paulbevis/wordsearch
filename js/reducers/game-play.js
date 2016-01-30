@@ -18,7 +18,8 @@ const initialState = {
     grid: fillDefaultGrid({}, START_SET, 6, 6),
     words: initialWords(),
     lettersFound: [],
-    sound: {play: false}
+    sound: {play: false},
+    gameOver: false
 };
 
 function cellSelectedUpdate(newState, state, action) {
@@ -161,7 +162,7 @@ export function gamePlay(state = initialState, action) {
                 ...state.grid.rows.slice(action.rowPos + 1)
             ];
             //lettersFound update
-            newState.lettersFound=[];
+            newState.lettersFound = [];
 
             //wordsFound update
             wordsFoundUpdate(newState, state, action);
