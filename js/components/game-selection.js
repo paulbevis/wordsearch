@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import GameSelector from './GameSelector'
+import GameSelector from './game-selector'
 
 export default class GameSelection extends Component {
     buildRow(start, end) {

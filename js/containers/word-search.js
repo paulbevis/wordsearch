@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import {cellClickAction, startGameAction, selectGameAction, cellExplosionFragmentAction} from '../actions/wordSearch'
-import Grid from '../components/Grid'
-import Start from '../components/Start'
-import SelectGame from '../components/SelectGame'
-import GameSelection from '../components/GameSelection'
-import WordList from '../components/WordList'
-import PlaySound from '../components/PlaySound'
+import {cellClickAction, startGameAction, selectGameAction, cellExplosionFragmentAction} from '../actions/word-search'
+import Grid from '../components/grid'
+import Start from '../components/start'
+import SelectGame from '../components/select-game'
+import GameSelection from '../components/game-selection'
+import WordList from '../components/word-list'
+import PlaySound from '../components/play-sound'
 import RaisedButton from 'material-ui/lib/raised-button';
 
 class WordSearch extends Component {

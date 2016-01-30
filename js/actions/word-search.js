@@ -1,4 +1,4 @@
-import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT} from '../constants/actionTypes.js'
+import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT} from '../constants/action-types'
 
 export function startGameAction() {
     return {

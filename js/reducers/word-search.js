@@ -1,6 +1,6 @@
-import {CELL_CLICK, GAME_START, GAME_SELECT} from '../constants/actionTypes'
+import {CELL_CLICK, GAME_START, GAME_SELECT} from '../constants/action-types'
 import { combineReducers } from 'redux'
-import {gamePlay} from './gamePlay'
+import {gamePlay} from './game-play'
 
 export function currentGame(state = '', action) {
     switch (action.type) {

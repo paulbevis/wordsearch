@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Row from './Row'
+import Row from './row'
 import {MAX_GRID_HEIGHT} from '../constants/data'
 
 export default class Grid extends Component {

@@ -1,6 +1,5 @@
 import expect from 'expect'
-import {gamePlay,fillDefaultGrid} from '../../js/reducers/gamePlay'
-import * as types from '../../js/constants/actionTypes'
+import {gamePlay,fillDefaultGrid} from '../../js/reducers/game-play'
 import {Cell, Sound}  from '../../js/domain/components'
 import {CELL_CLICK, GAME_START, GAME_SELECT} from '../../js/constants/actionTypes'
 

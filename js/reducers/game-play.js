@@ -1,6 +1,6 @@
-import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT} from '../constants/actionTypes'
+import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT} from '../constants/action-types'
 import {MAX_GRID_WIDTH, MAX_GRID_HEIGHT, START_SET} from '../constants/data'
-import createBoard,{fillDefaultGrid} from './boardCreator'
+import createBoard,{fillDefaultGrid} from './board-creator'
 
 
 function initialWords() {

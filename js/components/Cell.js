@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Explosion from './Explosion'
+import Explosion from './explosion'
 
 export default class Cell extends Component {
     buildInnerComponent(value) {

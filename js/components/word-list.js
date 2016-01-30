@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import Word from './Word'
+import Word from './word'
 
 export default class WordList extends Component {
 
