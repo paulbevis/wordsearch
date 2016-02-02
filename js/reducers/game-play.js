@@ -150,7 +150,7 @@ export function gamePlay(state = initialState, action) {
                 wordsFoundUpdate(newState, state, action);
 
                 //update game over
-                newState.gameOver = isGameOver(newState, action);
+                isGameOver(newState, action);
 
                 return newState;
             } else {
