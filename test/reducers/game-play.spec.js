@@ -2,7 +2,7 @@ import expect from 'expect'
 import {gamePlay} from '../../js/reducers/game-play'
 import {fillDefaultGrid} from '../../js/reducers/board-creator'
 import {Cell, Sound}  from '../../js/domain/components'
-import {CELL_CLICK, GAME_START, GAME_SELECT} from '../../js/constants/action-types'
+import {CELL_CLICK, GAME_START, GAME_SELECT, LAST_LETTER_FOUND} from '../../js/constants/action-types'
 
 
 describe('gamePlay reducer', () => {
@@ -95,8 +95,16 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             gameOver: false
         };
-        state.grid.rows[1].cols[4].value = 'p';
-
+        state.grid.rows[1].cols[0].value = 'p';
+        state.grid.rows[1].cols[1].value = 'o';
+        state.grid.rows[1].cols[2].value = 't';
+        state.words.push({
+            word: 'can', wordFound: false, positionInGrid: [
+                {'letter': 'p', 'colPosition': 0, 'rowPosition': 1},
+                {'letter': 'o', 'colPosition': 1, 'rowPosition': 1},
+                {'letter': 't', 'colPosition': 2, 'rowPosition': 1}
+            ]
+        });
         //after legal selection
         let expectedState = {
             grid: fillDefaultGrid({}, '-'),
@@ -108,17 +116,27 @@ describe('gamePlay reducer', () => {
             gameOver: false
         };
         //cell is selected
-        let cell = new Cell('p', 1, 4, true);
-        expectedState.grid.rows[1].cols[4] = cell;
+        let cell = new Cell('p', 1, 0, true);
+        let cell2 = new Cell('o', 1, 1, false);
+        let cell3 = new Cell('t', 1, 2, false);
+        expectedState.grid.rows[1].cols[0] = cell;
+        expectedState.grid.rows[1].cols[1] = cell2;
+        expectedState.grid.rows[1].cols[2] = cell3;
         //selected cell added to lettersfound
         expectedState.lettersFound.push(cell);
-
+        expectedState.words.push({
+            word: 'can', wordFound: false, positionInGrid: [
+                {'letter': 'p', 'colPosition': 0, 'rowPosition': 1},
+                {'letter': 'o', 'colPosition': 1, 'rowPosition': 1},
+                {'letter': 't', 'colPosition': 2, 'rowPosition': 1}
+            ]
+        });
         //select cell
-        state = gamePlay(state, {type: CELL_CLICK, rowPos: 1, columnPos: 4});
+        state = gamePlay(state, {type: CELL_CLICK, rowPos: 1, columnPos: 0});
         expect(state).toEqual(expectedState);
 
         //unselect cell
-        expect(gamePlay(state, {type: CELL_CLICK, rowPos: 1, columnPos: 4}).grid).toEqual(state.grid)
+        expect(gamePlay(state, {type: CELL_CLICK, rowPos: 1, columnPos: 0}).grid).toEqual(state.grid)
     });
 
     it('first click, updates letters found', () => {
@@ -647,6 +665,7 @@ describe('gamePlay reducer', () => {
         // first clicks
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 0});
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 1});
+        state = gamePlay(state, {type: LAST_LETTER_FOUND});
         expect(state).toEqual(expectedState);
 
     })

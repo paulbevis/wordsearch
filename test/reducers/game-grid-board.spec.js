@@ -23,10 +23,14 @@ function findWord(state, wordObj) {
     return state;
 }
 
+function allWordsFound(newState) {
+    return newState.words.reduce((prev, curr) => prev + curr.wordFound, 0) === newState.words.length
+}
+
 function findAllWords(boardNumber, wordNumber = 10) {
     let state = gamePlay(undefined, {type: GAME_SELECT, changeValue: 'wordSet' + boardNumber});
     let wordsFoundArray = state.words.filter(word=>word.wordFound);
-    while (!state.gameOver) {
+    while (!allWordsFound(state)) {
         let wordObjects = Object.assign([], state.words);
         let counter = 0;
         while (counter < wordObjects.length) {
