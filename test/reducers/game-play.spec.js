@@ -1,5 +1,6 @@
 import expect from 'expect'
-import {gamePlay,fillDefaultGrid} from '../../js/reducers/game-play'
+import {gamePlay} from '../../js/reducers/game-play'
+import {fillDefaultGrid} from '../../js/reducers/board-creator'
 import {Cell, Sound}  from '../../js/domain/components'
 import {CELL_CLICK, GAME_START, GAME_SELECT} from '../../js/constants/action-types'
 
@@ -53,7 +54,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         expect(
             gamePlay(undefined, {})
@@ -64,7 +66,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-', 6, 6),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[0].cols[0].value = 'p';
         state.words.push({word: 'push', wordFound: false});
@@ -74,7 +77,8 @@ describe('gamePlay reducer', () => {
             grid: fillDefaultGrid({}, '-', 6, 6),
             lettersFound: [],
             sound: {play: false},
-            words: [{word: 'push', wordFound: false}]
+            words: [{word: 'push', wordFound: false}],
+            gameOver: false
         };
 
 
@@ -88,7 +92,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-'),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[1].cols[4].value = 'p';
 
@@ -99,7 +104,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         //cell is selected
         let cell = new Cell('p', 1, 4, true);
@@ -122,7 +128,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         state.grid.rows[1].cols[4].value = 'p';
         state.words.push({word: 'push', wordFound: false});
@@ -134,7 +141,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         //cell is selected
         let cell = new Cell('p', 1, 4, true);
@@ -150,7 +158,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-'),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[1].cols[4].value = 'p';
         state.words.push({word: 'push', wordFound: false});
@@ -162,7 +171,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
 
         //cell is selected
@@ -187,7 +197,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-'),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[0].cols[0].value = 'c';
         state.grid.rows[0].cols[1].value = 'a';
@@ -215,7 +226,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         expectedState.grid.rows[0].cols[0].value = 'c';
         expectedState.grid.rows[0].cols[1].value = 'a';
@@ -260,10 +272,13 @@ describe('gamePlay reducer', () => {
         expectedState.lettersFound = [];
         expectedState.grid.rows[0].cols[0].selected = false;
         expectedState.grid.rows[0].cols[0].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[0].explode = true;
         expectedState.grid.rows[0].cols[1].selected = false;
         expectedState.grid.rows[0].cols[1].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[1].explode = true;
         expectedState.grid.rows[0].cols[2].selected = false;
         expectedState.grid.rows[0].cols[2].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[2].explode = true;
         expectedState.words[0].wordFound = true;
         expectedState.sound.play = true;
         expectedState.sound.type = 'success';
@@ -275,7 +290,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-', 6, 6),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[0].cols[0].value = 'c';
         state.grid.rows[0].cols[1].value = 'a';
@@ -303,7 +319,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         expectedState.grid.rows[0].cols[0].value = 'c';
         expectedState.grid.rows[0].cols[1].value = 'a';
@@ -336,10 +353,13 @@ describe('gamePlay reducer', () => {
         expectedState.lettersFound = [];
         expectedState.grid.rows[0].cols[0].selected = false;
         expectedState.grid.rows[0].cols[0].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[0].explode = true;
         expectedState.grid.rows[0].cols[1].selected = false;
         expectedState.grid.rows[0].cols[1].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[1].explode = true;
         expectedState.grid.rows[0].cols[2].selected = false;
         expectedState.grid.rows[0].cols[2].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[2].explode = true;
         expectedState.words[0].wordFound = true;
         expectedState.sound.play = true;
         expectedState.sound.type = 'success';
@@ -351,6 +371,7 @@ describe('gamePlay reducer', () => {
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 0});
         let cell = new Cell('c', 0, 0, true);
         cell.partOfWordFound = true;
+        cell.explode = true;
         expectedState.grid.rows[0].cols[0] = cell;
         expectedState.words[0].wordFound = true;
         expectedState.sound = {};
@@ -365,9 +386,11 @@ describe('gamePlay reducer', () => {
         state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 2});
         let cell2 = new Cell('a', 0, 1, true);
         cell2.partOfWordFound = true;
+        cell2.explode = true;
         expectedState.grid.rows[0].cols[1] = cell2;
         let cell3 = new Cell('n', 0, 2, true);
         cell3.partOfWordFound = true;
+        cell3.explode = true;
         expectedState.grid.rows[0].cols[2] = cell3;
         expectedState.lettersFound.push(cell2);
         expectedState.lettersFound.push(cell3);
@@ -379,7 +402,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-', 6, 6),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[0].cols[0].value = 'c';
         state.grid.rows[0].cols[1].value = 'a';
@@ -407,7 +431,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         expectedState.grid.rows[0].cols[0].value = 'c';
         expectedState.grid.rows[0].cols[1].value = 'a';
@@ -447,10 +472,13 @@ describe('gamePlay reducer', () => {
         expectedState.lettersFound = [];
         expectedState.grid.rows[0].cols[0].selected = false;
         expectedState.grid.rows[0].cols[0].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[0].explode = true;
         expectedState.grid.rows[0].cols[1].selected = false;
         expectedState.grid.rows[0].cols[1].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[1].explode = true;
         expectedState.grid.rows[0].cols[2].selected = false;
         expectedState.grid.rows[0].cols[2].partOfWordFound = true;
+        expectedState.grid.rows[0].cols[2].explode = true;
         expectedState.sound = {
             "play": true,
             "type": "success"
@@ -464,7 +492,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-', 6, 6),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[1].cols[4].value = 'z';
         state.grid.rows[0].cols[0].value = 'c';
@@ -485,7 +514,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         expectedState.grid.rows[1].cols[4].value = 'z';
         expectedState.grid.rows[0].cols[0].value = 'c';
@@ -516,7 +546,8 @@ describe('gamePlay reducer', () => {
         let state = {
             grid: fillDefaultGrid({}, '-'),
             words: [],
-            lettersFound: []
+            lettersFound: [],
+            gameOver: false
         };
         state.grid.rows[1].cols[0].value = 'z';
         state.grid.rows[0].cols[0].value = 'c';
@@ -537,7 +568,8 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": false
-            }
+            },
+            gameOver: false
         };
         expectedState.grid.rows[1].cols[0].value = 'z';
         expectedState.grid.rows[0].cols[0].value = 'c';
@@ -568,23 +600,56 @@ describe('gamePlay reducer', () => {
 
     })
 
-    it('should be able to find all words in any grid', () => {
-            let boardNumber = 1;
-            while (boardNumber < 2) {
+    it('should set game over when all words are found', () => {
+        let state = {
+            grid: fillDefaultGrid({}, '-'),
+            words: [],
+            lettersFound: [],
+            gameOver: false
+        };
+        state.grid.rows[0].cols[0].value = 'h';
+        state.grid.rows[0].cols[1].value = 'e';
+        state.words.push({
+            word: 'he', wordFound: false, positionInGrid: [
+                {'letter': 'h', 'colPosition': 0, 'rowPosition': 0},
+                {'letter': 'e', 'colPosition': 1, 'rowPosition': 0}
+            ]
+        });
 
-                let state = gamePlay(undefined, {type: GAME_SELECT, changeValue: 'wordSet' + boardNumber});
+        //after legal selection
+        let expectedState = {
+            grid: fillDefaultGrid({}, '-'),
+            words: [],
+            lettersFound: [],
+            "sound": {
+                "play": true,
+                "type":"success"
+            },
+            gameOver: true
+        };
+        expectedState.grid.rows[0].cols[0].value = 'h';
+        expectedState.grid.rows[0].cols[0].selected = true;
+        expectedState.grid.rows[0].cols[1].value = 'e';
 
-                state.words.map((wordObj)=> {
-                    wordObj.positionInGrid.map((cellPosObj)=> {
-                        state = gamePlay(state, {type: CELL_CLICK, rowPos: cellPosObj.rowPosition, columnPos: cellPosObj.colPosition})
-                    })
-                })
-                let wordsFoundArray = state.words.filter(word=>word.wordFound)
-                expect(wordsFoundArray.length).toEqual(state.words.length)
-                boardNumber++;
-            }
-        }
-    )
+        expectedState.words.push({
+            word: 'he', wordFound: true, positionInGrid: [
+                {'letter': 'h', 'rowPosition': 0, 'colPosition': 0},
+                {'letter': 'e', 'rowPosition': 0, 'colPosition': 1}]
+        });
+        let cell = new Cell('h', 0, 0, false, true, true);
+        let cell2 = new Cell('e', 0, 1, false, true, true);
+        cell2.lastLetterToBeFound = true;
+        expectedState.grid.rows[0].cols[0] = cell;
+        expectedState.grid.rows[0].cols[1] = cell2;
+        expectedState.lettersFound = [];
+
+
+        // first clicks
+        state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 0});
+        state = gamePlay(state, {type: CELL_CLICK, rowPos: 0, columnPos: 1});
+        expect(state).toEqual(expectedState);
+
+    })
 
 
 });

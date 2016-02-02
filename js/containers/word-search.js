@@ -10,20 +10,31 @@ import PlaySound from '../components/play-sound'
 import RaisedButton from 'material-ui/lib/raised-button';
 
 class WordSearch extends Component {
+
+    componentDisplay() {
+        let container = [];
+
+        if (this.props.gameOver) {
+            container.push(<div className="col span_9_of_12">
+                <div key='gameOver' className="game-over">Game Over!!!!!!</div>
+            </div>)
+        }
+        container.push(<Grid key="grid" onCellClick={(rowPos,columnPos) =>this.props.dispatch(cellClickAction(rowPos, columnPos))}
+                             grid={this.props.grid}
+                             onCellExplosionFragment={(rowPos,columnPos)=>this.props.dispatch(cellExplosionFragmentAction(rowPos,columnPos))}/>)
+        container.push(<WordList key="wordList" wordList={this.props.wordList}/>)
+        return container
+    }
+
     render() {
-        const { dispatch, grid, selectedGame, wordList, sound } = this.props;
+        const { dispatch, grid, selectedGame, wordList, sound, gameOver } = this.props;
 
         return (
             <div className="section group" style={{ }}>
                 <div className="col span_12_of_12">
-                    <div className="section group" style={{ }}>
 
-                        <Grid onCellClick={(rowPos,columnPos) =>dispatch(cellClickAction(rowPos, columnPos))}
-                              grid={grid}
-                              onCellExplosionFragment={(rowPos,columnPos)=>dispatch(cellExplosionFragmentAction(rowPos,columnPos))}/>
-
-                        <WordList wordList={wordList}/>
-
+                    <div className="section group">
+                        {this.componentDisplay()}
                     </div>
                 </div>
                 <div className="section group">
@@ -43,7 +54,8 @@ function select(state) {
         grid: state.gamePlay.grid,
         selectedGame: state.currentGame,
         wordList: state.gamePlay.words,
-        sound: state.gamePlay.sound
+        sound: state.gamePlay.sound,
+        gameOver: state.gamePlay.gameOver
     };
 }
 

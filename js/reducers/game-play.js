@@ -44,16 +44,19 @@ function lettersFoundUpdate(newState, state, action) {
     }
 }
 
+function allWordsFound(newState) {
+    return newState.words.reduce((prev, curr) => prev + curr.wordFound, 0) === newState.words.length
+}
+
 function wordsFoundUpdate(newState, state, action) {
     newState.words = state.words;
     if (newState.lettersFound.length >= 1) {
         let wordMatch = false;
         let posOfMatchedWord = 0;
         newState.words.map((word, index) => {
-                let lettersMatched = 0;
-                if (word.word.length === newState.lettersFound.length && !word.wordFound) {
+                if (word.word.length === newState.lettersFound.length && newState.lettersFound.length <= MAX_GRID_HEIGHT && !wordMatch) {
+                    let lettersMatched = 0;
                     newState.lettersFound.map(letterCell=> {
-
                         if (word.positionInGrid.find(letterPosInWord => {
                                     return (letterPosInWord.colPosition === letterCell.columnPos &&
                                     letterPosInWord.rowPosition === letterCell.rowPos &&
@@ -63,31 +66,32 @@ function wordsFoundUpdate(newState, state, action) {
                             lettersMatched++;
                         }
                     });
-                    if (lettersMatched === word.word.length) {
+                    if (lettersMatched === word.word.length && !word.wordFound) {
                         wordMatch = true;
                         posOfMatchedWord = index;
+                        newState.words = [
+                            ...state.words.slice(0, posOfMatchedWord),
+                            Object.assign({}, state.words[posOfMatchedWord], {wordFound: true}),
+                            ...state.words.slice(posOfMatchedWord + 1)
+                        ];
+
+                        newState.lettersFound.map(letterCell=> {
+                            letterCell.partOfWordFound = true;
+                            letterCell.selected = false;
+                            letterCell.explode = true;
+                        });
+                        if (allWordsFound(newState)) {
+                            newState.lettersFound[newState.lettersFound.length - 1].lastLetterToBeFound = true;
+                            newState.gameOver = true;
+                        }
+                        newState.lettersFound = [];
+                        newState.sound = Object.assign({}, {play: true, type: 'success'});
                     }
-                }
-                if (wordMatch) {
-                    newState.words = [
-                        ...state.words.slice(0, posOfMatchedWord),
-                        Object.assign({}, state.words[posOfMatchedWord], {wordFound: true}),
-                        ...state.words.slice(posOfMatchedWord + 1)
-                    ];
-                    newState.lettersFound.map(letterCell=> {
-                        letterCell.partOfWordFound = true;
-                        letterCell.selected = false;
-                        letterCell.explode = true;
-                    });
-                    newState.lettersFound = [];
-                    newState.sound = Object.assign({}, {play: true, type: 'success'});
                 }
             }
         );
-
     }
 }
-
 
 function isLegalCellClick(state, action) {
     if (state.lettersFound.length === 0) {
@@ -124,7 +128,7 @@ function isLegalCellClick(state, action) {
 }
 
 export function gamePlay(state = initialState, action) {
-    let newState = {'grid': {}, sound: {play: false}};
+    let newState = {'grid': {}, sound: {play: false}, gameOver: false};
     switch (action.type) {
         case CELL_CLICK:
             if (isLegalCellClick(state, action)) {
@@ -167,6 +171,7 @@ export function gamePlay(state = initialState, action) {
             //wordsFound update
             wordsFoundUpdate(newState, state, action);
             newState.grid.rows[action.rowPos].cols[action.columnPos].explode = false;
+
 
             return newState;
 

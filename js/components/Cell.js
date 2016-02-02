@@ -28,14 +28,23 @@ export default class Cell extends Component {
         };
 
         return (
-            <div ref="container" className="col span_1_of_10" onClick={this.props.onClick} style={myStyle}>
+            <div ref="container" className="col span_1_of_10"
+                 onClick={this.props.onClick}
+                 style={myStyle}
+                 onLastLetterOFLastWord={this.props.onLastLetterOFLastWord}>
                 {this.buildInnerComponent(this.props.value)}
             </div>
         )
+    }
+    componentDidMount() {
+        if (this.props.lastLetterToBFound && !this.props.explode){
+            this.props.onLastLetterOFLastWord(this.props.rowPos, this.props.columnPos);
+        }
     }
 }
 
 Cell.propTypes = {
     onClick: PropTypes.func.isRequired,
-    onCellExplosionFragment: PropTypes.func.isRequired
+    onCellExplosionFragment: PropTypes.func.isRequired,
+    onLastLetterOFLastWord: PropTypes.func.isRequired
 };

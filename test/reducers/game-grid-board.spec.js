@@ -1,35 +1,58 @@
 import expect from 'expect'
 import {gamePlay,fillDefaultGrid} from '../../js/reducers/game-play'
 import {Cell, Sound}  from '../../js/domain/components'
-import {CELL_CLICK, GAME_START, GAME_SELECT} from '../../js/constants/actionTypes'
+import {CELL_CLICK, GAME_START, GAME_SELECT} from '../../js/constants/action-types'
 
+function isWordMatched(myState, myWordObj) {
+    //console.log('=', (!!myState.words.find(word => word.word === myWordObj.word && word.wordFound)))
+    return !!myState.words.find(word => word.word === myWordObj.word && word.wordFound)
+}
+function findWord(state, wordObj) {
+    let charPos = 0;
+    while (!isWordMatched(state, wordObj)) {
+        let action = {type: CELL_CLICK, rowPos: wordObj.positionInGrid[charPos].rowPosition, columnPos: wordObj.positionInGrid[charPos].colPosition};
+        state = gamePlay(state, action)
+        // if letterfound is empty, that must mean that a word has been found, so check whether the word found is the one
+        // we are looking for, if it is not we reset and start selecting the preset cells again.
+        if (state.lettersFound.length !== 0) {
+            charPos++;
+        } else {
+            charPos = 0;
+        }
+    }
+    return state;
+}
 
-function findAllWords(boardNumber) {
+function findAllWords(boardNumber, wordNumber = 10) {
     let state = gamePlay(undefined, {type: GAME_SELECT, changeValue: 'wordSet' + boardNumber});
-
-    state.words.map((wordObj)=> {
-        wordObj.positionInGrid.map((cellPosObj)=> {
-            state = gamePlay(state, {type: CELL_CLICK, rowPos: cellPosObj.rowPosition, columnPos: cellPosObj.colPosition})
-        })
-    });
+    let wordsFoundArray = state.words.filter(word=>word.wordFound);
+    while (!state.gameOver) {
+        let wordObjects = Object.assign([], state.words);
+        let counter = 0;
+        while (counter < wordObjects.length) {
+            state = findWord(state, wordObjects[counter++])
+        }
+    }
     return state
 }
 
-function checkBoard(boardNumber, wordNumber=10) {
+function checkBoard(boardNumber, wordNumber = 10) {
     let grids = 0;
-    while (grids < 100) {
-        let state = findAllWords(boardNumber);
+    while (grids++ < 100) {
+        let state = findAllWords(boardNumber, wordNumber);
         let wordsFoundArray = state.words.filter(word=>word.wordFound);
+        if (wordsFoundArray.length !== wordNumber) {
+            debugger;
+        }
         expect(wordsFoundArray.length).toEqual(wordNumber)
         expect(wordsFoundArray.length).toEqual(state.words.length);
-        grids++;
     }
 }
 
 describe('each board should be completable', () => {
 
     it('should be able to find all words in grid 1', () => {
-            checkBoard(1, 8)
+            checkBoard(1)
         }
     )
 

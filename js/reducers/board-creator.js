@@ -1,4 +1,4 @@
-import {GAMES, START_SET, LEFT_TO_RIGHT, TOP_TO_BOTTOM, CHAR_SET} from '../constants/data'
+import {GAMES, START_SET, LEFT_TO_RIGHT, TOP_TO_BOTTOM, CHAR_SET, MAX_GRID_WIDTH, MAX_GRID_HEIGHT} from '../constants/data'
 import {Cell} from '../domain/components'
 
 export function fillDefaultGrid(grid, gridSet, gridWidth = MAX_GRID_WIDTH, gridHeight = MAX_GRID_HEIGHT) {
