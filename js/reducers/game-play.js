@@ -142,6 +142,8 @@ export function gamePlay(state = initialState, action) {
                 //wordsFound update
                 wordsFoundUpdate(newState, state, action);
 
+                //update game over
+                newState.gameOver=state.gameOver;
                 return newState;
             } else {
                 newState.grid = state.grid;
@@ -172,6 +174,8 @@ export function gamePlay(state = initialState, action) {
             wordsFoundUpdate(newState, state, action);
             newState.grid.rows[action.rowPos].cols[action.columnPos].explode = false;
 
+            //update game over
+            newState.gameOver=state.gameOver;
 
             return newState;
 

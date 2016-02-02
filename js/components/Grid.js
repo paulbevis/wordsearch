@@ -26,7 +26,10 @@ export default class Grid extends Component {
                 <div className="section group" style={{background:'#0cc3ff'}}>
                     {this.provideDummyRows('b')}
                     {this.props.grid.rows.map((row, index)=>
-                        <Row key={index} onCellClick={this.props.onCellClick} onCellExplosionFragment={this.props.onCellExplosionFragment} {...row} />)
+                        <Row key={index} onCellClick={this.props.onCellClick}
+                             onCellExplosionFragment={this.props.onCellExplosionFragment}
+                             onLastLetterOfLastWord={this.props.onLastLetterOfLastWord}
+                            {...row} />)
                     }
                     {this.provideDummyRows('a')}
                 </div>

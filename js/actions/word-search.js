@@ -1,4 +1,4 @@
-import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT} from '../constants/action-types'
+import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT, LAST_LETTER_FOUND} from '../constants/action-types'
 
 export function startGameAction() {
     return {
@@ -21,17 +21,16 @@ export function cellClickAction(rowPos, columnPos) {
     }
 }
 
-export function cellExplodedAction(rowPos, columnPos) {
-    return {
-        type: CELL_EXPLODED,
-        rowPos,
-        columnPos
-    }
-}
 export function cellExplosionFragmentAction(rowPos, columnPos) {
     return {
         type: CELL_EXPLOSION_FRAGMENT,
         rowPos,
         columnPos
+    }
+}
+
+export function lastLetterFoundAction() {
+    return {
+        type: LAST_LETTER_FOUND
     }
 }

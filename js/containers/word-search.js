@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import {cellClickAction, startGameAction, selectGameAction, cellExplosionFragmentAction} from '../actions/word-search'
+import {cellClickAction, startGameAction, selectGameAction, cellExplosionFragmentAction, lastLetterFoundAction} from '../actions/word-search'
 import Grid from '../components/grid'
 import Start from '../components/start'
 import SelectGame from '../components/select-game'
@@ -21,7 +21,8 @@ class WordSearch extends Component {
         }
         container.push(<Grid key="grid" onCellClick={(rowPos,columnPos) =>this.props.dispatch(cellClickAction(rowPos, columnPos))}
                              grid={this.props.grid}
-                             onCellExplosionFragment={(rowPos,columnPos)=>this.props.dispatch(cellExplosionFragmentAction(rowPos,columnPos))}/>)
+                             onCellExplosionFragment={(rowPos,columnPos)=>this.props.dispatch(cellExplosionFragmentAction(rowPos,columnPos))}
+                             onLastLetterOfLastWord={()=>this.props.dispatch(lastLetterFoundAction())}/>)
         container.push(<WordList key="wordList" wordList={this.props.wordList}/>)
         return container
     }
