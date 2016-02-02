@@ -14,15 +14,11 @@ class WordSearch extends Component {
     componentDisplay() {
         let container = [];
 
-        if (this.props.gameOver) {
-            container.push(<div className="col span_9_of_12">
-                <div key='gameOver' className="game-over">Game Over!!!!!!</div>
-            </div>)
-        }
         container.push(<Grid key="grid" onCellClick={(rowPos,columnPos) =>this.props.dispatch(cellClickAction(rowPos, columnPos))}
                              grid={this.props.grid}
                              onCellExplosionFragment={(rowPos,columnPos)=>this.props.dispatch(cellExplosionFragmentAction(rowPos,columnPos))}
-                             onLastLetterOfLastWord={()=>this.props.dispatch(lastLetterFoundAction())}/>)
+                             onLastLetterOfLastWord={()=>this.props.dispatch(lastLetterFoundAction())}
+                            gameOver={this.props.gameOver}/>)
         container.push(<WordList key="wordList" wordList={this.props.wordList}/>)
         return container
     }

@@ -20,9 +20,16 @@ export default class Grid extends Component {
         return divs
     }
 
+    isGameOverOverlay() {
+        if (this.props.gameOver) {
+            return <div key='gameOver' className="game-over" style={{position:'absolute'}}>Game Over!!!!!!</div>
+        }
+    }
+
     render() {
         return (
             <div className="col span_9_of_12">
+                {this.isGameOverOverlay()}
                 <div className="section group" style={{background:'#0cc3ff'}}>
                     {this.provideDummyRows('b')}
                     {this.props.grid.rows.map((row, index)=>
