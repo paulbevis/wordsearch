@@ -22,7 +22,23 @@ export default class Grid extends Component {
 
     isGameOverOverlay() {
         if (this.props.gameOver) {
-            return <div key='gameOver' className="game-over" style={{position:'absolute'}}>Game Over!!!!!!</div>
+            return <div key='gameOver' className="game-over" style={{   position: 'absolute',
+                                                                        top: '33%',
+                                                                        left: '11%',
+                                                                        height: '150px',
+                                                                        background: '#b1edff',
+                                                                        zIndex: '1',
+                                                                        opacity: '.95',
+                                                                        fontSize: '60px',
+                                                                        width: '50%',
+                                                                        borderRadius: '20px',
+                                                                        padding: '20px',
+                                                                        textAlign: 'center',
+                                                                        display: 'flex',
+                                                                        justifyContent: 'center',
+                                                                        alignItems: 'center'}}>
+                <div>Well Done!</div>
+            </div>
         }
     }
 
