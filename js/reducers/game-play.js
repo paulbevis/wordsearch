@@ -1,4 +1,4 @@
-import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT} from '../constants/action-types'
+import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT, LAST_LETTER_FOUND} from '../constants/action-types'
 import {MAX_GRID_WIDTH, MAX_GRID_HEIGHT, START_SET} from '../constants/data'
 import createBoard,{fillDefaultGrid} from './board-creator'
 
@@ -80,10 +80,7 @@ function wordsFoundUpdate(newState, state, action) {
                             letterCell.selected = false;
                             letterCell.explode = true;
                         });
-                        if (allWordsFound(newState)) {
-                            newState.lettersFound[newState.lettersFound.length - 1].lastLetterToBeFound = true;
-                            newState.gameOver = true;
-                        }
+
                         newState.lettersFound = [];
                         newState.sound = Object.assign({}, {play: true, type: 'success'});
                     }
@@ -126,10 +123,20 @@ function isLegalCellClick(state, action) {
 
     return false;
 }
+function isGameOver(newState, action) {
+    if (allWordsFound(newState)) {
+        newState.grid.rows[action.rowPos].cols[action.columnPos].lastLetterToBeFound = true;
+    }
+}
 
 export function gamePlay(state = initialState, action) {
     let newState = {'grid': {}, sound: {play: false}, gameOver: false};
     switch (action.type) {
+        case LAST_LETTER_FOUND:
+            newState = state;
+            newState.gameOver = true;
+            return newState;
+
         case CELL_CLICK:
             if (isLegalCellClick(state, action)) {
 
@@ -143,7 +150,8 @@ export function gamePlay(state = initialState, action) {
                 wordsFoundUpdate(newState, state, action);
 
                 //update game over
-                newState.gameOver=state.gameOver;
+                newState.gameOver = isGameOver(newState, action);
+
                 return newState;
             } else {
                 newState.grid = state.grid;
@@ -175,7 +183,7 @@ export function gamePlay(state = initialState, action) {
             newState.grid.rows[action.rowPos].cols[action.columnPos].explode = false;
 
             //update game over
-            newState.gameOver=state.gameOver;
+            newState.gameOver = state.gameOver;
 
             return newState;
 

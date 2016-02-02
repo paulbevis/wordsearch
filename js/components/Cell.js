@@ -36,8 +36,8 @@ export default class Cell extends Component {
             </div>
         )
     }
-    componentDidMount() {
-        if (this.props.lastLetterToBFound && !this.props.explode){
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.lastLetterToBeFound && !this.props.explode){
             this.props.onLastLetterOfLastWord();
         }
     }
