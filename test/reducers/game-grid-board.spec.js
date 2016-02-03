@@ -57,7 +57,7 @@ function findAllWords(boardNumber, wordNumber = 10) {
 
 function checkBoard(boardNumber, wordNumber = 10) {
     let grids = 0;
-    while (grids++ < 100) {
+    while (grids++ < 25) {
         let state = findAllWords(boardNumber, wordNumber);
         let wordsFoundArray = state.words.filter(word=>word.wordFound);
         if (wordsFoundArray.length !== wordNumber) {
