@@ -150,6 +150,7 @@ export function gamePlay(state = initialState, action) {
         case LAST_LETTER_FOUND:
             newState = state;
             newState.gameOver = true;
+            newState.sound={play:true, type:'congratulations'};
             return newState;
 
         case CELL_CLICK:
@@ -199,6 +200,9 @@ export function gamePlay(state = initialState, action) {
 
             //update game over
             newState.gameOver = state.gameOver;
+
+            //take sound settings
+            newState.sound=state.sound;
 
             return newState;
 
