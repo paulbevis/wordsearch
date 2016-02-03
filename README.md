@@ -13,6 +13,7 @@ A word search game created using Redux and React
 
 
 #License Apache
+
 Copyright 2015 Paul Bevis
 
  Licensed under the Apache License, Version 2.0 (the "License");
