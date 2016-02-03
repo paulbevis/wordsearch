@@ -22,13 +22,12 @@ export default class PlaySound extends Component {
                 <audio src="audio/success.m4a" preload="auto" ref="success"/>
                 <audio src="audio/warning.m4a" preload="auto" ref="warning"/>
                 <audio src="audio/applause.mp3" preload="auto" ref="congratulations"/>
-                {this.playSound()}
             </div>
         )
     }
 
 
-    playSound() {
+    componentDidUpdate(prevProps, prevState) {
         // will only contain data after didMount is called!
         if (this.refs.success && this.props.sound.play) {
             switch (this.props.sound.type) {
