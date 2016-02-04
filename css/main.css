@@ -3,12 +3,6 @@ body {
     font-family: monospace;
 }
 
-.title {
-    font-size: 30px;
-    line-height: 40px;
-    padding-left: 10px;
-}
-
 .framework {
     width: 760px;
     background: #0cc3ff;
@@ -16,10 +10,6 @@ body {
     margin: 0 auto;
     resize: both;
     overflow: auto;
-}
-
-.title {
-    color: white;
 }
 
 #root {
