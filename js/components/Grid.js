@@ -39,7 +39,7 @@ export default class Grid extends Component {
         if (this.props.gameOver) {
             return <div key='gameOver' className="game-over" style={{   position: 'absolute',
                                                                         top: '33%',
-                                                                        left: '11%',
+                                                                        left: '10%',
                                                                         height: '150px',
                                                                         background: '#b1edff',
                                                                         zIndex: '1',
