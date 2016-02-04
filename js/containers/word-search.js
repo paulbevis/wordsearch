@@ -47,32 +47,37 @@ class WordSearch extends Component {
         const { dispatch, grid, selectedGame, wordList, sound, gameOver } = this.props;
 
         return (
-            <div className="section group" style={{ }}>
-                <div className="col span_12_of_12" style={{marginTop: '3px', marginBottom: '0'}}>
-
-                    <div className="section group">
-                        {this.componentDisplay()}
-                    </div>
-                </div>
+            <div>
                 <div className="section group">
-                    <div className="col span_12_of_12">
-
-                        <Toolbar style={{background:'#0cc3ff'}}>
-                            <SelectGameDialog onGameSelect={(value) => dispatch(selectGameAction(value))}/>
-                            <ToolbarGroup float="right" lastChild={true}>
-                                <ToolbarSeparator />
-                                <FlatButton label="About" style={{color:'#333'}}/>
-                            </ToolbarGroup>
-                        </Toolbar>
-                    </div>
+                    <div className="col span_8_of_12" style={{fontSize: '30px', lineHeight: '40px', color: 'white', paddingLeft: '10px'}}>Year One Sight Words</div>
+                    <div className="col span_3_of_12" style={{fontSize: '24px', lineHeight: '40px',  color:'#333', marginLeft:'30px'}}><span style={{float: 'right'}}>{selectedGame}</span></div>
                 </div>
-                <PlaySound sound={sound}/>
+                <div id="root" className="section group" style={{ }}>
+                    <div className="col span_12_of_12" style={{marginTop: '3px', marginBottom: '0'}}>
+
+                        <div className="section group">
+                            {this.componentDisplay()}
+                        </div>
+                    </div>
+                    <div className="section group">
+                        <div className="col span_12_of_12">
+
+                            <Toolbar style={{background:'#0cc3ff'}}>
+                                <SelectGameDialog onGameSelect={(value) => dispatch(selectGameAction(value))}/>
+                                <ToolbarGroup float="right" lastChild={true}>
+                                    <ToolbarSeparator />
+                                    <FlatButton label="About" style={{color:'#333'}}/>
+                                </ToolbarGroup>
+                            </Toolbar>
+                        </div>
+                    </div>
+                    <PlaySound sound={sound}/>
+                </div>
             </div>
         )
     }
 }
 
-//<SelectGameDialog onGameSelect={(value) => dispatch(selectGameAction(value))}/>
 function select(state) {
     return {
         grid: state.gamePlay.grid,

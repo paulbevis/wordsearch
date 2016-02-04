@@ -20,7 +20,7 @@ import {gamePlay} from './game-play'
 export function currentGame(state = '', action) {
     switch (action.type) {
         case GAME_SELECT:
-            return action.changeValue;
+            return '(List '+action.listNumber+')';
         default:
             return state
     }
