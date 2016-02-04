@@ -22,6 +22,11 @@ import SelectGame from '../components/select-game'
 import GameSelection from '../components/game-selection'
 import WordList from '../components/word-list'
 import PlaySound from '../components/play-sound'
+import SelectGameDialog from '../components/select-game-dialog'
+import Toolbar from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
+import FlatButton from 'material-ui/lib/flat-button';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 class WordSearch extends Component {
@@ -43,15 +48,22 @@ class WordSearch extends Component {
 
         return (
             <div className="section group" style={{ }}>
-                <div className="col span_12_of_12">
+                <div className="col span_12_of_12" style={{marginTop: '3px', marginBottom: '0'}}>
 
                     <div className="section group">
                         {this.componentDisplay()}
                     </div>
                 </div>
                 <div className="section group">
-                    <div className="col span_12_of_12" style={{marginTop:'-5px'}}>
-                        <GameSelection onGameSelect={(value) => dispatch(selectGameAction(value))}/>
+                    <div className="col span_12_of_12">
+
+                        <Toolbar style={{background:'#0cc3ff'}}>
+                            <SelectGameDialog onGameSelect={(value) => dispatch(selectGameAction(value))}/>
+                            <ToolbarGroup float="right" lastChild={true}>
+                                <ToolbarSeparator />
+                                <FlatButton label="About" style={{color:'#333'}}/>
+                            </ToolbarGroup>
+                        </Toolbar>
                     </div>
                 </div>
                 <PlaySound sound={sound}/>
@@ -60,7 +72,7 @@ class WordSearch extends Component {
     }
 }
 
-
+//<SelectGameDialog onGameSelect={(value) => dispatch(selectGameAction(value))}/>
 function select(state) {
     return {
         grid: state.gamePlay.grid,
