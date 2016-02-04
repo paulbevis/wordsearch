@@ -656,7 +656,7 @@ describe('gamePlay reducer', () => {
             lettersFound: [],
             "sound": {
                 "play": true,
-                "type":"success"
+                "type":"congratulations"
             },
             gameOver: true
         };
