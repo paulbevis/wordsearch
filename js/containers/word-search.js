@@ -33,7 +33,7 @@ class WordSearch extends Component {
                              grid={this.props.grid}
                              onCellExplosionFragment={(rowPos,columnPos)=>this.props.dispatch(cellExplosionFragmentAction(rowPos,columnPos))}
                              onLastLetterOfLastWord={()=>this.props.dispatch(lastLetterFoundAction())}
-                            gameOver={this.props.gameOver}/>)
+                             gameOver={this.props.gameOver}/>)
         container.push(<WordList key="wordList" wordList={this.props.wordList}/>)
         return container
     }
