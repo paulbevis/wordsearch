@@ -27,5 +27,5 @@ render(
   <Provider store={store}>
     <WordSearch />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('framework')
 )
