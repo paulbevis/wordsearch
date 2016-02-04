@@ -23,7 +23,8 @@ export default class GameSelector extends Component {
             lineHeight: 40 + 'px',
             fontSize: 30 + 'px',
             textAlign: 'center',
-            'cursor': 'pointer'
+            cursor: 'pointer',
+            color: '#333'
         };
         return (
             <div className="col span_1_of_10" onClick={(e)=>this.props.onGameSelect('wordSet' + this.props.value)} style={myStyle}>

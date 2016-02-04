@@ -27,7 +27,8 @@ export default class Word extends Component {
             textAlign: 'center',
             height: '40px',
             marginTop: '5px',
-            marginBottom: '5px'
+            marginBottom: '5px',
+            color: '#333'
         }
         return (
             <div className="section group" style={{paddingLeft: '7px', paddingRight:'7px'}}>

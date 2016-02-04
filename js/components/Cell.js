@@ -39,7 +39,8 @@ export default class Cell extends Component {
             fontSize: 30 + 'px',
             textAlign: 'center',
             'cursor': 'pointer',
-            position: 'relative'
+            position: 'relative',
+            color: '#333'
         };
 
         return (
