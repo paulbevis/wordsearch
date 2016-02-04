@@ -21,10 +21,10 @@ export function startGameAction() {
     }
 }
 
-export function selectGameAction(changeValue) {
+export function selectGameAction(listNumber) {
     return {
         type: GAME_SELECT,
-        changeValue
+        listNumber
     }
 }
 

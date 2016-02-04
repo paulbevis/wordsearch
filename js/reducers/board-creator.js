@@ -124,7 +124,7 @@ function repositionPrevious(counter, newState) {
 }
 
 export default function createBoard(newState, action) {
-    let game = GAMES[action.changeValue];
+    let game = GAMES[action.listNumber];
     newState.grid = fillDefaultGrid([], START_SET, game.gridWidth, game.gridHeight);
     newState.words = [];
 

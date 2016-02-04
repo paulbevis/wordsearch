@@ -34,7 +34,7 @@ export default class GameSelector extends Component {
     }
 
     handleSelectorClick(e) {
-        this.props.onGameSelect('wordSet' + this.props.value)
+        this.props.onGameSelect(this.props.value)
     }
 
 }
