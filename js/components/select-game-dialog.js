@@ -63,7 +63,7 @@ export default class SelectGameDialog extends Component {
                     modal={false}
                     open={this.state.open}
                     onRequestClose={this.handleClose}
-                    contentStyle={{width:'60%'}}>
+                    contentStyle={{width:'40%'}}>
                     <div className="section group">
                         {this.buildRows(1, 5)}
                     </div>
