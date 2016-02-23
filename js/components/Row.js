@@ -44,6 +44,7 @@ export default class Row extends Component {
                           onClick={() => this.props.onCellClick(cell.rowPos, cell.columnPos)}
                           onCellExplosionFragment={this.props.onCellExplosionFragment}
                           onLastLetterOfLastWord={this.props.onLastLetterOfLastWord}
+                          gameOver={this.props.gameOver}
                     />
                 )}
                 {this.provideDummyCells('a')}
