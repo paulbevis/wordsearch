@@ -21,7 +21,7 @@ export default class WordList extends Component {
     padRows(numberOfWords) {
         let divs = [];
         while (numberOfWords < 10) {
-            divs.push(<div key={'word-pad'+numberOfWords} style={{height: '40px', marginTop: '5px', marginBottom: '5px'}}></div>);
+            divs.push(<div key={'word-pad'+numberOfWords} style={{height: '38px', marginTop: '5px', marginBottom: '5px'}}></div>);
             numberOfWords++;
         }
         return divs;

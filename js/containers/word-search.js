@@ -48,8 +48,8 @@ class WordSearch extends Component {
         return (
             <div>
                 <div className="section group">
-                    <div className="col span_8_of_12" style={{fontSize: '30px', lineHeight: '40px', color: 'white', paddingLeft: '10px'}}>Year One Sight Words</div>
-                    <div className="col span_3_of_12" style={{fontSize: '24px', lineHeight: '40px',  color:'#333', marginLeft:'30px'}}><span style={{float: 'right'}}>{selectedGame}</span></div>
+                    <div className="col span_8_of_12" style={{fontSize: '25px', lineHeight: '38px', color: 'white', paddingLeft: '10px'}}>Year One Sight Words</div>
+                    <div className="col span_3_of_12" style={{fontSize: '22px', lineHeight: '38px',  color:'#333', marginLeft:'30px'}}><span style={{float: 'right'}}>{selectedGame}</span></div>
                 </div>
                 <div id="root" className="section group" style={{ }}>
                     <div className="col span_12_of_12" style={{marginTop: '3px', marginBottom: '0'}}>
