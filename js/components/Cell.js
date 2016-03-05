@@ -17,6 +17,7 @@ import React, { Component, PropTypes } from 'react'
 import Explosion from './explosion'
 
 export default class Cell extends Component {
+
   buildInnerComponent(value) {
     if (this.props.explode) {
       var divs = [];
@@ -31,10 +32,11 @@ export default class Cell extends Component {
     }
   }
 
+
   render() {
 
     const myStyle = {
-      background: this.props.selected ? '#b1edff' : this.props.partOfWordFound ? 'lightGreen' : 'lightGray',
+      background: this.props.selected ? '#ff4081' : this.props.partOfWordFound ? 'lightGreen' : 'lightGray',
       'borderRadius': 3 + 'px',
       lineHeight: 38 + 'px',
       fontSize: 25 + 'px',
