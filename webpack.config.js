@@ -1,9 +1,10 @@
 var path = require('path');
+
 module.exports = {
     entry: "./entry.js",
     output: {
         path: __dirname,
-        filename: "./public/[name].js",
+        filename: "./public/[name].min.js",
         chunkFilename: "[id].js"
     },
     devtool: 'source-map',
