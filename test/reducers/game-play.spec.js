@@ -653,7 +653,6 @@ describe('gamePlay reducer', () => {
         let expectedState = {
             grid: fillDefaultGrid({}, '-'),
             words: [],
-            lettersFound: [],
             "sound": {
                 "play": true,
                 "type":"congratulations"
@@ -671,10 +670,8 @@ describe('gamePlay reducer', () => {
         });
         let cell = new Cell('h', 0, 0, false, true, true);
         let cell2 = new Cell('e', 0, 1, false, true, true);
-        cell2.lastLetterToBeFound = true;
         expectedState.grid.rows[0].cols[0] = cell;
         expectedState.grid.rows[0].cols[1] = cell2;
-        expectedState.lettersFound = [];
 
 
         // first clicks
