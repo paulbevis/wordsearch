@@ -25,11 +25,10 @@ export default class Word extends Component {
             lineHeight: '38px',
             fontSize: 25 + 'px',
             textAlign: 'center',
-            //height: '38px',
             marginTop: '3.1%',
             marginBottom: '3.1%',
             color: '#333'
-        }
+        };
         return (
             <div className="section group" style={{paddingLeft: '7px', paddingRight:'7px'}}>
                 <div className="col span_12_of_12" style={wordStyle}>
