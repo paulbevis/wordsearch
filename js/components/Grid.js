@@ -13,11 +13,12 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import Row from './row'
 import {MAX_GRID_HEIGHT} from '../constants/data'
 
 export default class Grid extends Component {
+  
   provideDummyRows(keyPefix) {
     let gridHeight = this.props.grid.rows.length;
     let blankRow = MAX_GRID_HEIGHT - gridHeight;
@@ -36,24 +37,26 @@ export default class Grid extends Component {
   }
 
   isGameOverOverlay() {
+    const gameOverStyle = {
+      position: 'absolute',
+      top: '33%',
+      left: '10%',
+      background: '#b1edff',
+      zIndex: '1',
+      opacity: '.95',
+      fontSize: '40px',
+      width: '50%',
+      borderRadius: '20px',
+      padding: '20px',
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center'
+    };
     if (this.props.gameOver) {
-      return <div key='gameOver' className="game-over" style={{   position: 'absolute',
-                                                                        top: '33%',
-                                                                        left: '10%',
-                                                                        height: '150px',
-                                                                        background: '#b1edff',
-                                                                        zIndex: '1',
-                                                                        opacity: '.95',
-                                                                        fontSize: '60px',
-                                                                        width: '50%',
-                                                                        borderRadius: '20px',
-                                                                        padding: '20px',
-                                                                        textAlign: 'center',
-                                                                        display: 'flex',
-                                                                        justifyContent: 'center',
-                                                                        alignItems: 'center'}}>
-        <div>Well Done!</div>
-      </div>
+      return (<div key='gameOver' className="game-over" style={gameOverStyle}>
+        <div style={{marginBottom:'20px'}}>Well Done!</div>
+        <div style={{fontSize:'26px'}}>Let's move on to the next level...</div>
+      </div>)
     }
   }
 

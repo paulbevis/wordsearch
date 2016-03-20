@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
 export default class PlaySound extends Component {
   render() {
@@ -42,5 +42,20 @@ export default class PlaySound extends Component {
           break;
       }
     }
+  }
+
+  componentDidMount() {
+    this.refs.congratulations.addEventListener("ended", (e)=> {
+      let nextGameNumber = 1;
+      if (this.props.game !== 20) {
+        nextGameNumber = this.props.game + 1;
+      }
+      this.props.nextGame(nextGameNumber)
+    })
+  }
+
+  componentWillUnmount() {
+    this.congratulations.comp.removeEventListener("animationend", (e)=> {
+    }, false);
   }
 }
