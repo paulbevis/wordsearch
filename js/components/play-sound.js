@@ -13,34 +13,49 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
 export default class PlaySound extends Component {
-    render() {
-        return (
-            <div>
-                <audio src="audio/success.m4a" preload="auto" ref="success"/>
-                <audio src="audio/warning.m4a" preload="auto" ref="warning"/>
-                <audio src="audio/applause.mp3" preload="auto" ref="congratulations"/>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <audio src="audio/success.m4a" preload="auto" ref="success"/>
+        <audio src="audio/warning.m4a" preload="auto" ref="warning"/>
+        <audio src="audio/applause.mp3" preload="auto" ref="congratulations"/>
+      </div>
+    )
+  }
 
 
-    componentDidUpdate(prevProps, prevState) {
-        // will only contain data after didMount is called!
-        if (this.refs.success && this.props.sound.play) {
-            switch (this.props.sound.type) {
-                case'success':
-                    this.refs.success.play();
-                    break;
-                case 'warning':
-                    this.refs.warning.play();
-                    break;
-                case 'congratulations':
-                    this.refs.congratulations.play();
-                    break;
-            }
-        }
+  componentDidUpdate(prevProps, prevState) {
+    // will only contain data after didMount is called!
+    if (this.props.sound.play) {
+      switch (this.props.sound.type) {
+        case'success':
+          this.refs.success.play();
+          break;
+        case 'warning':
+          this.refs.warning.play();
+          break;
+        case 'congratulations':
+          this.refs.congratulations.play();
+          break;
+      }
     }
+  }
+
+  componentDidMount() {
+    this.refs.congratulations.addEventListener("ended", (e)=> {
+      let nextGameNumber = 1;
+      if (this.props.game !== 20) {
+        nextGameNumber = this.props.game + 1;
+      }
+      this.props.nextGame(nextGameNumber)
+    })
+  }
+
+  componentWillUnmount() {
+    this.congratulations.comp.removeEventListener("animationend", (e)=> {
+    }, false);
+  }
 }

@@ -14,22 +14,22 @@
  limitations under the License.
  */
 import {CELL_CLICK, GAME_START, GAME_SELECT} from '../constants/action-types'
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 import {gamePlay} from './game-play'
 
 export function currentGame(state = '', action) {
-    switch (action.type) {
-        case GAME_SELECT:
-            return '(List '+action.listNumber+')';
-        default:
-            return state
-    }
+  switch (action.type) {
+    case GAME_SELECT:
+      return {'description': '(List ' + action.listNumber + ')', 'number': action.listNumber};
+    default:
+      return state
+  }
 
 }
 
 const wordSearchAppReducers = combineReducers({
-    gamePlay,
-    currentGame
+  gamePlay,
+  currentGame
 });
 
 export default wordSearchAppReducers

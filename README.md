@@ -6,6 +6,9 @@ A word search game created using Redux and React
 
 > webpack --watch
 
+###To build production version (minified)
+webpack --config webpack.production.config.js
+
 
 ###To test the app:
 

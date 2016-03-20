@@ -18,8 +18,6 @@ import { connect } from 'react-redux'
 import {cellClickAction, startGameAction, selectGameAction, cellExplosionFragmentAction, lastLetterFoundAction} from '../actions/word-search'
 import Grid from '../components/grid'
 import Start from '../components/start'
-import SelectGame from '../components/select-game'
-import GameSelection from '../components/game-selection'
 import WordList from '../components/word-list'
 import PlaySound from '../components/play-sound'
 import SelectGameDialog from '../components/select-game-dialog'
@@ -48,8 +46,8 @@ class WordSearch extends Component {
         return (
             <div>
                 <div className="section group">
-                    <div className="col span_8_of_12" style={{fontSize: '30px', lineHeight: '40px', color: 'white', paddingLeft: '10px'}}>Year One Sight Words</div>
-                    <div className="col span_3_of_12" style={{fontSize: '24px', lineHeight: '40px',  color:'#333', marginLeft:'30px'}}><span style={{float: 'right'}}>{selectedGame}</span></div>
+                    <div className="col span_8_of_12" style={{fontSize: '25px', lineHeight: '38px', color: 'white', paddingLeft: '10px'}}>Year One Sight Words</div>
+                    <div className="col span_3_of_12" style={{fontSize: '22px', lineHeight: '38px',  color:'#333', marginLeft:'30px'}}><span style={{float: 'right'}}>{selectedGame.description}</span></div>
                 </div>
                 <div id="root" className="section group" style={{ }}>
                     <div className="col span_12_of_12" style={{marginTop: '3px', marginBottom: '0'}}>
@@ -67,7 +65,7 @@ class WordSearch extends Component {
                             </Toolbar>
                         </div>
                     </div>
-                    <PlaySound sound={sound}/>
+                    <PlaySound sound={sound} game={selectedGame.number} nextGame={value => dispatch(selectGameAction(value))}/>
                 </div>
             </div>
         )

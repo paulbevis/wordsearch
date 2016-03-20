@@ -22,14 +22,13 @@ export default class Word extends Component {
             background: this.props.wordFound ? 'lightGreen' : 'lightGray',
             alignItems: 'center',
             'borderRadius': 3 + 'px',
-            lineHeight: '40px',
-            fontSize: 30 + 'px',
+            lineHeight: '38px',
+            fontSize: 25 + 'px',
             textAlign: 'center',
-            height: '40px',
-            marginTop: '5px',
-            marginBottom: '5px',
+            marginTop: '3.1%',
+            marginBottom: '3.1%',
             color: '#333'
-        }
+        };
         return (
             <div className="section group" style={{paddingLeft: '7px', paddingRight:'7px'}}>
                 <div className="col span_12_of_12" style={wordStyle}>

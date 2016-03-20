@@ -19,7 +19,6 @@ import {Cell, Sound}  from '../../js/domain/components'
 import {CELL_CLICK, GAME_START, GAME_SELECT} from '../../js/constants/action-types'
 
 function isWordMatched(myState, myWordObj) {
-    //console.log('=', (!!myState.words.find(word => word.word === myWordObj.word && word.wordFound)))
     return !!myState.words.find(word => word.word === myWordObj.word && word.wordFound)
 }
 function findWord(state, wordObj) {

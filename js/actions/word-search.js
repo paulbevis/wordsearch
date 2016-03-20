@@ -16,36 +16,36 @@
 import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT, LAST_LETTER_FOUND} from '../constants/action-types'
 
 export function startGameAction() {
-    return {
-        type: GAME_START
-    }
+  return {
+    type: GAME_START
+  }
 }
 
 export function selectGameAction(listNumber) {
-    return {
-        type: GAME_SELECT,
-        listNumber
-    }
+  return {
+    type: GAME_SELECT,
+    listNumber
+  }
 }
 
 export function cellClickAction(rowPos, columnPos) {
-    return {
-        type: CELL_CLICK,
-        rowPos,
-        columnPos
-    }
+  return {
+    type: CELL_CLICK,
+    rowPos,
+    columnPos
+  }
 }
 
 export function cellExplosionFragmentAction(rowPos, columnPos) {
-    return {
-        type: CELL_EXPLOSION_FRAGMENT,
-        rowPos,
-        columnPos
-    }
+  return {
+    type: CELL_EXPLOSION_FRAGMENT,
+    rowPos,
+    columnPos
+  }
 }
 
 export function lastLetterFoundAction() {
-    return {
-        type: LAST_LETTER_FOUND
-    }
+  return {
+    type: LAST_LETTER_FOUND
+  }
 }

@@ -20,8 +20,8 @@ export default class GameSelector extends Component {
         const myStyle = {
             background: this.props.selected ? 'lightBlue' : this.props.partOfWordFound ? 'lightGreen' : 'lightGray',
             borderRadius: '3px',
-            lineHeight: '40px',
-            fontSize: '30px',
+            lineHeight: '38px',
+            fontSize: '25px',
             textAlign: 'center',
             cursor: 'pointer',
             color: '#333'
