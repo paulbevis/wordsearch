@@ -21,6 +21,9 @@ import WordSearch from './js/containers/word-search'
 
 import { createStore } from 'redux'
 import wordSearchAppReducers from './js/reducers/word-search'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
+
 const store = createStore(wordSearchAppReducers);
 
 render(
