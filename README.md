@@ -1,5 +1,12 @@
 # wordsearch
-A word search game created using Redux and React
+A word search game created using Redux and React, built with webpack, transpiled by babel, and tested with mocha.
+
+All the words are what we call 'site' words, they are words young children learn to recognize on 'site'.
+
+This game is aimed at younger children, hence there are a high proportion of short words, and they can only we found on a horizontal and vertical plane, 
+starting left to right, and top to bottom.  There are no words to be found diagonally, and none in reverse.
+
+[Demo site:](http://catamaranprojects.com/wordsearch)
 
 
 ###To automatcially rebuild on code change:
