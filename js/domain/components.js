@@ -21,6 +21,5 @@ export class Cell {
     this.selected = selected;
     this.explode = explode;
     this.partOfWordFound = partOfWordFound;
-    this.explosionsFinished = 0;
   }
 }
