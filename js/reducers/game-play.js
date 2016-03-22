@@ -15,7 +15,8 @@
  */
 import {CELL_CLICK, GAME_START, GAME_SELECT, CELL_EXPLOSION_FRAGMENT, LAST_LETTER_FOUND} from '../constants/action-types'
 import {MAX_GRID_WIDTH, MAX_GRID_HEIGHT, START_SET} from '../constants/data'
-import createBoard,{fillDefaultGrid} from './board-creator'
+import createBoard, {fillDefaultGrid} from './board-creator'
+import {Cell} from '../domain/components'
 
 
 function initialWords() {
@@ -37,25 +38,44 @@ const initialState = {
   gameOver: false
 };
 
+function cloneCell(cell) {
+  return new Cell(cell.value, cell.rowPos, cell.columnPos, cell.selected, cell.explode, cell.partOfWordFound)
+}
+
+function cloneRow(row) {
+  let cols = row.cols.map(cell=> cloneCell(cell));
+  return {cols};
+}
+
+function cloneWord(word) {
+  let posInGrid = word.positionInGrid.map(data => Object.assign({}, data))
+  return {
+    positionInGrid: posInGrid,
+    word: word.word,
+    wordFound: word.wordFound
+  }
+}
+
 function cellSelectedUpdate(newState, state, action) {
+  let newRow = cloneRow(state.grid.rows[action.rowPos]);
   newState.grid.rows = [
     ...state.grid.rows.slice(0, action.rowPos),
-    Object.assign({}, state.grid.rows[action.rowPos]),
+    newRow,
     ...state.grid.rows.slice(action.rowPos + 1)
   ];
   newState.grid.rows[action.rowPos].cols[action.columnPos].selected = !state.grid.rows[action.rowPos].cols[action.columnPos].selected;
 }
 
+
 function lettersFoundUpdate(newState, state, action) {
   let cell = newState.grid.rows[action.rowPos].cols[action.columnPos];
   if (cell.selected) {
     // cell is now selected so should be added to the letters found array
-    newState.lettersFound = state.lettersFound;
+    newState.lettersFound = state.lettersFound.map(cell=>cell);
     newState.lettersFound.push(cell);
   } else {
     // the cell was selected, so now unselect it!
-    newState.lettersFound = state.lettersFound;
-    newState.lettersFound = state.lettersFound.filter(letterCell=> letterCell !== cell);
+    newState.lettersFound = state.lettersFound.filter(letterCell=> !( letterCell .columnPos === cell.columnPos && letterCell.rowPos === cell.rowPos) );
   }
 }
 
@@ -86,14 +106,16 @@ function wordsFoundUpdate(newState, state, action) {
             posOfMatchedWord = index;
             newState.words = [
               ...state.words.slice(0, posOfMatchedWord),
-              Object.assign({}, state.words[posOfMatchedWord], {wordFound: true}),
+              Object.assign({}, cloneWord(state.words[posOfMatchedWord]), {wordFound: true}),
               ...state.words.slice(posOfMatchedWord + 1)
             ];
 
             newState.lettersFound.map(letterCell=> {
-              letterCell.partOfWordFound = true;
-              letterCell.selected = false;
-              letterCell.explode = true;
+              let newCell = cloneCell(newState.grid.rows[letterCell.rowPos].cols[letterCell.columnPos]);
+              newCell.partOfWordFound = true;
+              newCell.selected = false;
+              newCell.explode = true;
+              newState.grid.rows[letterCell.rowPos].cols[letterCell.columnPos] = newCell;
             });
 
             newState.lettersFound = [];
@@ -194,11 +216,12 @@ export function gamePlay(state = initialState, action) {
 
       //wordsFound update
       newState.words = state.words;
+      newState.grid.rows[action.rowPos].cols[action.columnPos] = cloneCell(newState.grid.rows[action.rowPos].cols[action.columnPos]);
       newState.grid.rows[action.rowPos].cols[action.columnPos].explode = false;
 
       //update game over
       newState.gameOver = state.gameOver;
-      isGameOver(newState, action)
+      isGameOver(newState, action);
       //lettersFound update
       newState.lettersFound = [];
       return newState;
