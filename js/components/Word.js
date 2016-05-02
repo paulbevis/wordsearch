@@ -19,7 +19,7 @@ import React, { Component, PropTypes } from 'react'
 export default class Word extends Component {
     render() {
         const wordStyle = {
-            background: this.props.wordFound ? 'lightGreen' : 'lightGray',
+            background: this.props.wordFound ? '#09BF22' : 'lightGray',
             alignItems: 'center',
             'borderRadius': 3 + 'px',
             lineHeight: '38px',
