@@ -16,12 +16,13 @@
 import React, {Component, PropTypes} from 'react'
 
 export default class PlaySound extends Component {
+
   render() {
     return (
       <div>
-        <audio src="audio/success.m4a" preload="auto" ref="success"/>
-        <audio src="audio/warning.m4a" preload="auto" ref="warning"/>
-        <audio src="audio/applause.m4a" preload="auto" ref="congratulations"/>
+        <audio src="audio/success.m4a" preload="auto" ref={(ref) => this.success = ref}/>
+        <audio src="audio/warning.m4a" preload="auto" ref={(ref) => this.warning = ref}/>
+        <audio src="audio/applause.m4a" preload="auto" ref={(ref) => this.congratulations = ref}/>
       </div>
     )
   }
@@ -32,20 +33,20 @@ export default class PlaySound extends Component {
     if (this.props.sound.play) {
       switch (this.props.sound.type) {
         case'success':
-          this.refs.success.play();
+          this.success.play();
           break;
         case 'warning':
-          this.refs.warning.play();
+          this.warning.play();
           break;
         case 'congratulations':
-          this.refs.congratulations.play();
+          this.congratulations.play();
           break;
       }
     }
   }
 
   componentDidMount() {
-    this.refs.congratulations.addEventListener("ended", (e)=> {
+    this.congratulations.addEventListener("ended", (e)=> {
       let nextGameNumber = 1;
       if (this.props.game !== 20) {
         nextGameNumber = this.props.game + 1;
