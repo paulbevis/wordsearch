@@ -30,6 +30,7 @@ export default class PlaySound extends Component {
   componentDidUpdate(prevProps, prevState) {
     // will only contain data after didMount is called!
     if (this.props.sound.play) {
+      console.log('sound: ',this.props.sound)
       switch (this.props.sound.type) {
         case'success':
           this.refs.success.play();
@@ -46,6 +47,7 @@ export default class PlaySound extends Component {
 
   componentDidMount() {
     this.refs.congratulations.addEventListener("ended", (e)=> {
+      console.log('congrats finished playing...')
       let nextGameNumber = 1;
       if (this.props.game !== 20) {
         nextGameNumber = this.props.game + 1;
@@ -55,7 +57,7 @@ export default class PlaySound extends Component {
   }
 
   componentWillUnmount() {
-    this.congratulations.comp.removeEventListener("animationend", (e)=> {
+    this.congratulations.comp.removeEventListener("ended", (e)=> {
     }, false);
   }
 }
