@@ -40,11 +40,9 @@ export default class AboutGameDialog extends Component {
     this.setState({open: false});
   };
 
-
   componentWillReceiveProps(nextProps) {
     this.setState({open: false});
   }
-
 
   render() {
     const actions = [
