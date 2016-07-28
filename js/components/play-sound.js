@@ -21,7 +21,7 @@ export default class PlaySound extends Component {
       <div>
         <audio src="audio/success.m4a" preload="auto" ref="success"/>
         <audio src="audio/warning.m4a" preload="auto" ref="warning"/>
-        <audio src="audio/applause.mp3" preload="auto" ref="congratulations"/>
+        <audio src="audio/applause.m4a" preload="auto" ref="congratulations"/>
       </div>
     )
   }
@@ -30,7 +30,6 @@ export default class PlaySound extends Component {
   componentDidUpdate(prevProps, prevState) {
     // will only contain data after didMount is called!
     if (this.props.sound.play) {
-      console.log('sound: ',this.props.sound)
       switch (this.props.sound.type) {
         case'success':
           this.refs.success.play();
@@ -47,7 +46,6 @@ export default class PlaySound extends Component {
 
   componentDidMount() {
     this.refs.congratulations.addEventListener("ended", (e)=> {
-      console.log('congrats finished playing...')
       let nextGameNumber = 1;
       if (this.props.game !== 20) {
         nextGameNumber = this.props.game + 1;
