@@ -22,7 +22,7 @@ export default class PlaySound extends Component {
       <div>
         <audio src="audio/success.m4a" preload="auto" ref={(ref) => this.success = ref}/>
         <audio src="audio/warning.m4a" preload="auto" ref={(ref) => this.warning = ref}/>
-        <audio src="audio/applause.m4a" preload="auto" ref={(ref) => this.congratulations = ref}/>
+        <audio src="audio/congrats.m4a" preload="auto" ref={(ref) => this.congratulations = ref}/>
       </div>
     )
   }
@@ -40,20 +40,19 @@ export default class PlaySound extends Component {
           break;
         case 'congratulations':
           this.congratulations.play();
-          this.props.nextGame(2)
           break;
       }
     }
   }
 
   componentDidMount() {
-    // this.congratulations.onended = (e) => {
-      // let nextGameNumber = 1;
-      // if (this.props.game !== 20) {
-      //   nextGameNumber = this.props.game + 1;
-      // }
-      // this.props.nextGame(nextGameNumber)
-    // }
+    this.congratulations.onended = (e) => {
+      let nextGameNumber = 1;
+      if (this.props.game !== 20) {
+        nextGameNumber = this.props.game + 1;
+      }
+      this.props.nextGame(nextGameNumber)
+    }
   }
 
   componentWillUnmount() {
