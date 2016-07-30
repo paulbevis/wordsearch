@@ -40,19 +40,20 @@ export default class PlaySound extends Component {
           break;
         case 'congratulations':
           this.congratulations.play();
+          this.props.nextGame(2)
           break;
       }
     }
   }
 
   componentDidMount() {
-    this.congratulations.onended = (e) => {
-      let nextGameNumber = 1;
-      if (this.props.game !== 20) {
-        nextGameNumber = this.props.game + 1;
-      }
-      this.props.nextGame(nextGameNumber)
-    }
+    // this.congratulations.onended = (e) => {
+      // let nextGameNumber = 1;
+      // if (this.props.game !== 20) {
+      //   nextGameNumber = this.props.game + 1;
+      // }
+      // this.props.nextGame(nextGameNumber)
+    // }
   }
 
   componentWillUnmount() {
