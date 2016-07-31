@@ -75,7 +75,7 @@ function lettersFoundUpdate(newState, state, action) {
     newState.lettersFound.push(cell);
   } else {
     // the cell was selected, so now unselect it!
-    newState.lettersFound = state.lettersFound.filter(letterCell=> !( letterCell .columnPos === cell.columnPos && letterCell.rowPos === cell.rowPos) );
+    newState.lettersFound = state.lettersFound.filter(letterCell=> !( letterCell.columnPos === cell.columnPos && letterCell.rowPos === cell.rowPos));
   }
 }
 
@@ -190,7 +190,10 @@ export function gamePlay(state = initialState, action) {
         wordsFoundUpdate(newState, state, action);
 
         //update game over
-        //isGameOver(newState, action);
+        newState.gameOver = isGameOver(newState, action);
+        if (newState.gameOver){
+          newState.sound = Object.assign({}, {play: true, type: 'congratulations'});
+        }
 
         return newState;
       } else {
