@@ -4,9 +4,10 @@
   "description": "A word search game created using Redux and React",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack-dev-server --env.dev --content-base public --port 9090 --host 192.168.0.29",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "build": "webpack -env.dev"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "mocha": "^2.4.5",
     "node-libs-browser": "^0.5.2",
     "react-addons-test-utils": "^0.14.7",
-    "webpack": "^1.12.14"
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1"
   }
 }
