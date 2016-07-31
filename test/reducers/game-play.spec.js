@@ -688,7 +688,7 @@ describe('gamePlay reducer', () => {
         {'letter': 'e', 'rowPosition': 0, 'colPosition': 1}]
     });
     let cell = new Cell('h', 0, 0, false, true, true);
-    let cell2 = new Cell('e', 0, 1, false, true, true);
+    let cell2 = new Cell('e', 0, 1, false, true, true, true);
     expectedState.grid.rows[0].cols[0] = cell;
     expectedState.grid.rows[0].cols[1] = cell2;
 
