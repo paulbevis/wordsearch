@@ -17,12 +17,16 @@ import React, {Component, PropTypes} from 'react'
 
 export default class PlaySound extends Component {
 
+  constructor(props){
+    super(props)
+
+  }
   render() {
     return (
       <div>
-        <audio src="audio/congrats.m4a" preload="auto" ref={(ref) => this.success = ref}/>
+        <audio src="audio/success.m4a" preload="auto" ref={(ref) => this.success = ref}/>
         <audio src="audio/warning.m4a" preload="auto" ref={(ref) => this.warning = ref}/>
-        <audio src="audio/congrats.m4a" preload="auto" ref={(ref) => this.congratulations = ref}/>
+        <audio src="audio/applause.m4a" preload="auto" ref={(ref) => this.congratulations = ref}/>
       </div>
     )
   }
@@ -55,8 +59,4 @@ export default class PlaySound extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.congratulations.comp.removeEventListener("ended", (e)=> {
-    }, false);
-  }
 }
