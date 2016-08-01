@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
 export default class Explosion extends Component {
 
@@ -30,7 +30,6 @@ export default class Explosion extends Component {
         this.props.onCellExplosionFragment(this.props.rowPos, this.props.columnPos);
       }
     }, false);
-
   }
 
   componentWillUnmount() {

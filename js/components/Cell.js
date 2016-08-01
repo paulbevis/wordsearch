@@ -13,7 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import Explosion from './explosion'
 
 export default class Cell extends Component {
@@ -23,7 +23,7 @@ export default class Cell extends Component {
       var divs = [];
       let counter = 0;
       while (counter < 16) {
-        divs.push(<Explosion explosionNumber={counter+1} key={'exp'+counter} {...this.props} onCellExplosionFragment={this.props.onCellExplosionFragment}/>);
+        divs.push(<Explosion explosionNumber={counter + 1} key={'exp' + counter} {...this.props} onCellExplosionFragment={this.props.onCellExplosionFragment}/>);
         counter++;
       }
       return divs

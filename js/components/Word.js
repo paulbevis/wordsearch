@@ -13,28 +13,32 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
 
 export default class Word extends Component {
-    render() {
-        const wordStyle = {
-            background: this.props.wordFound ? '#09BF22' : 'lightGray',
-            alignItems: 'center',
-            'borderRadius': 3 + 'px',
-            lineHeight: '38px',
-            fontSize: 25 + 'px',
-            textAlign: 'center',
-            marginTop: '3.1%',
-            marginBottom: '3.1%',
-            color: '#333'
-        };
-        return (
-            <div className="section group" style={{paddingLeft: '7px', paddingRight:'7px'}}>
-                <div className="col span_12_of_12" style={wordStyle}>
-                    {this.props.word}
-                </div>
-            </div>
-        )
-    }
+  render() {
+    const wordStyle = {
+      background: this.props.wordFound ? '#09BF22' : 'lightGray',
+      alignItems: 'center',
+      'borderRadius': 3 + 'px',
+      lineHeight: '38px',
+      fontSize: 25 + 'px',
+      textAlign: 'center',
+      marginTop: '3.1%',
+      marginBottom: '3.1%',
+      color: '#333'
+    };
+    return (
+      <div className="section group" style={{paddingLeft: '7px', paddingRight: '7px'}}>
+        <div className="col span_12_of_12" style={wordStyle}>
+          {this.props.word}
+        </div>
+      </div>
+    )
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.wordFound != this.props.wordFound || nextProps.word !== this.props.word);
+  }
 };
