@@ -23,6 +23,12 @@ export default class Explosion extends Component {
     )
   }
 
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.rowPos != this.props.rowPos ||
+    nextProps.selected !== this.props.selected ||
+    nextProps.columnPos !== this.props.columnPos);
+  }
+
   componentDidMount() {
     this.refs.comp.addEventListener("animationend", (e)=> {
       e.target.className = '';

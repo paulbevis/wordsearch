@@ -56,6 +56,13 @@ export default class Cell extends Component {
     )
   }
 
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.explode != this.props.explode ||
+    nextProps.selected !== this.props.selected ||
+    nextProps.partOfWordFound !== this.props.partOfWordFound ||
+    nextProps.value !== this.props.value);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.lastLetterToBeFound && !this.props.gameOver) {
       this.props.onLastLetterOfLastWord();
